@@ -60,6 +60,29 @@
         .lenis.lenis-stopped { overflow: hidden; }
         body { background-color: #030303; cursor: none; overflow-x: hidden; color: #e5e5e5; }
 
+        /* --- MOBILE OPTIMIZATIONS (NEW) --- */
+        @media (max-width: 768px) {
+            /* Disable custom cursor on mobile */
+            #cursor, #cursor-dot { display: none !important; }
+            body { cursor: auto !important; }
+            
+            /* Responsive Card Positions (CSS handles initial state instead of Inline Styles) */
+            #card-solare { transform: rotate(5deg) translate(15px, 5px); }
+            #card-vyne { transform: rotate(-5deg) translate(-15px, 5px); }
+            #card-zona { transform: rotate(0deg) translate(0px, -5px); }
+        }
+        
+        @media (min-width: 769px) {
+            /* Desktop positions */
+            #card-solare { transform: rotate(15deg) translate(80px, 10px); }
+            #card-vyne { transform: rotate(-10deg) translate(-80px, 10px); }
+            #card-zona { transform: rotate(0deg) translate(0px, -20px); }
+        }
+
+        /* Menu Dropdown Animation */
+        #nav-dropdown { transition: max-height 0.5s ease-in-out, opacity 0.3s ease; max-height: 0; overflow: hidden; opacity: 0; }
+        #nav-dropdown.open { max-height: 300px; opacity: 1; margin-top: 1rem; }
+
         /* FX */
         .noise-wrapper {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -78,19 +101,27 @@
         .project-deck { perspective: 2000px; transform-style: preserve-3d; }
         .holo-card {
             background: rgba(20, 20, 20, 0.95); border: 1px solid rgba(255,255,255,0.1);
-            transform-style: preserve-3d; transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s, border-color 0.5s;
-            cursor: none; overflow: hidden; position: relative;
+            transform-style: preserve-3d; 
+            /* Added transition for opacity and filter */
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s, border-color 0.5s, filter 0.5s, opacity 0.5s;
+            cursor: pointer; overflow: hidden; position: relative;
         }
         .holo-card::after {
             content: ""; position: absolute; top: 0; left: -100%; width: 200%; height: 100%;
             background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.05) 45%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.05) 55%, transparent 60%);
             animation: shimmer 4s infinite linear; pointer-events: none; z-index: 20;
         }
+        
+        /* ORIGINAL HOVER EFFECTS (Kept intact) */
         .card-zona:hover { box-shadow: 0 0 80px rgba(163, 230, 53, 0.5); border-color: #a3e635; z-index: 100 !important; }
         .card-vyne:hover { box-shadow: 0 0 80px rgba(168, 85, 247, 0.5); border-color: #a855f7; z-index: 100 !important; }
         .card-solare:hover { box-shadow: 0 0 80px rgba(250, 204, 21, 0.5); border-color: #facc15; z-index: 100 !important; }
         .card-print:hover { box-shadow: 0 0 80px rgba(56, 189, 248, 0.5); border-color: #38bdf8; z-index: 50; }
-        .project-deck:hover .holo-card:not(:hover) { filter: grayscale(100%) brightness(0.2); transform: scale(0.9) translateZ(-50px); opacity: 0.5; }
+        
+        /* Dim others on hover (Desktop only to avoid sticky hover on mobile) */
+        @media (hover: hover) {
+            .project-deck:hover .holo-card:not(:hover) { filter: grayscale(100%) brightness(0.2); transform: scale(0.9) translateZ(-50px); opacity: 0.5; }
+        }
 
         /* MODALS */
         .project-modal {
@@ -100,32 +131,20 @@
         }
         .project-modal.active { transform: translateY(0); opacity: 1; }
 
-        /* --- NEW IMAGE LOGIC (FLUID RESPONSIVE) --- */
+        /* IMAGES */
         .img-container { 
-            position: relative; 
-            width: 100%; 
-            height: auto; /* Hauteur auto selon l'image */
-            background: rgba(255,255,255,0.02); 
-            border: 1px solid rgba(255,255,255,0.08); 
-            border-radius: 4px; 
-            overflow: hidden; 
-            display: block;
+            position: relative; width: 100%; height: auto;
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); 
+            border-radius: 4px; overflow: hidden; display: block;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
-        .img-container img { 
-            width: 100%; 
-            height: auto; /* Garde le ratio */
-            display: block; 
-            object-fit: contain; /* Ne coupe jamais */
-            transition: transform 0.7s ease; 
-        }
+        .img-container img { width: 100%; height: auto; display: block; object-fit: contain; transition: transform 0.7s ease; }
         .img-container:hover { border-color: #a3e635; box-shadow: 0 0 30px rgba(163, 230, 53, 0.15); z-index: 10; }
         .img-container:hover img { transform: scale(1.02); }
 
         /* LOGO GRID ITEM */
         .logo-grid-item {
-            background: rgba(255,255,255,0.03);
-            display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.03); display: flex; align-items: center; justify-content: center;
             border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s;
             position: relative; overflow: hidden; aspect-ratio: 1/1;
         }
@@ -166,18 +185,40 @@
     <div id="cursor"></div>
     <div id="cursor-dot"></div>
 
-    <!-- NAV -->
+    <!-- NAV (UPDATED FOR MOBILE DROPDOWN) -->
     <nav class="fixed top-6 left-0 w-full z-50 flex justify-center px-4">
-        <div class="bg-black/80 backdrop-blur-xl border border-white/10 rounded-full px-2 p-2 flex items-center justify-between gap-2 w-auto max-w-2xl shadow-2xl">
-            <a href="#" class="cursor-pointer hover:scale-105 transition-transform bg-white/5 rounded-full p-2 w-10 h-10 flex items-center justify-center border border-white/10 magnetic-btn">
-                <img src="assets/images/logo-jf.png" alt="Logo" class="h-4 w-auto invert brightness-200">
-            </a>
-            <div class="hidden md:flex gap-1 px-4">
-                <a href="#about" class="nav-link text-[10px] font-mono text-neutral-400 hover:text-white hover:bg-white/5 px-4 py-2 rounded-full uppercase tracking-widest transition-all cursor-pointer magnetic-btn hacker-text" data-value="Studio">Studio</a>
-                <a href="#deck" class="nav-link text-[10px] font-mono text-neutral-400 hover:text-white hover:bg-white/5 px-4 py-2 rounded-full uppercase tracking-widest transition-all cursor-pointer magnetic-btn hacker-text" data-value="Work">Work</a>
-                <a href="#archives" class="nav-link text-[10px] font-mono text-neutral-400 hover:text-white hover:bg-white/5 px-4 py-2 rounded-full uppercase tracking-widest transition-all cursor-pointer magnetic-btn hacker-text" data-value="Archives">Archives</a>
+        <div id="nav-wrapper" class="bg-black/80 backdrop-blur-xl border border-white/10 rounded-2xl px-4 py-2 flex flex-col items-center w-auto max-w-2xl shadow-2xl transition-all duration-300">
+            
+            <!-- Top Bar -->
+            <div class="flex items-center justify-between w-full gap-4">
+                <a href="#" class="cursor-pointer hover:scale-105 transition-transform bg-white/5 rounded-full p-2 w-10 h-10 flex items-center justify-center border border-white/10 magnetic-btn">
+                    <img src="assets/images/logo-jf.png" alt="Logo" class="h-4 w-auto invert brightness-200">
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex gap-1 px-4">
+                    <a href="#about" class="nav-link text-[10px] font-mono text-neutral-400 hover:text-white hover:bg-white/5 px-4 py-2 rounded-full uppercase tracking-widest transition-all cursor-pointer magnetic-btn hacker-text" data-value="Studio">Studio</a>
+                    <a href="#deck" class="nav-link text-[10px] font-mono text-neutral-400 hover:text-white hover:bg-white/5 px-4 py-2 rounded-full uppercase tracking-widest transition-all cursor-pointer magnetic-btn hacker-text" data-value="Work">Work</a>
+                    <a href="#archives" class="nav-link text-[10px] font-mono text-neutral-400 hover:text-white hover:bg-white/5 px-4 py-2 rounded-full uppercase tracking-widest transition-all cursor-pointer magnetic-btn hacker-text" data-value="Archives">Archives</a>
+                </div>
+
+                <!-- Desktop CTA -->
+                <a href="#contact" class="hidden md:block nav-link bg-white text-black text-[10px] font-mono font-bold uppercase tracking-widest px-6 py-2.5 rounded-full hover:bg-brand-zona transition-colors cursor-pointer border border-white magnetic-btn">Start</a>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" id="menu-btn" class="md:hidden text-white font-mono text-[10px] uppercase border border-white/20 px-3 py-2 rounded-full hover:bg-white/10 transition-colors">
+                    [ MENU + ]
+                </button>
             </div>
-            <a href="#contact" class="nav-link bg-white text-black text-[10px] font-mono font-bold uppercase tracking-widest px-6 py-2.5 rounded-full hover:bg-brand-zona transition-colors cursor-pointer border border-white magnetic-btn">Start</a>
+
+            <!-- Mobile Dropdown Links -->
+            <div id="nav-dropdown" class="flex flex-col gap-2 md:hidden w-full">
+                <div class="h-[1px] w-full bg-white/10 my-2"></div>
+                <a href="#about" onclick="toggleMobileMenu()" class="nav-link text-center text-xs font-mono text-neutral-300 hover:text-brand-zona hover:bg-white/5 py-3 rounded-lg uppercase tracking-widest transition-all">Studio</a>
+                <a href="#deck" onclick="toggleMobileMenu()" class="nav-link text-center text-xs font-mono text-neutral-300 hover:text-brand-zona hover:bg-white/5 py-3 rounded-lg uppercase tracking-widest transition-all">Work</a>
+                <a href="#archives" onclick="toggleMobileMenu()" class="nav-link text-center text-xs font-mono text-neutral-300 hover:text-brand-zona hover:bg-white/5 py-3 rounded-lg uppercase tracking-widest transition-all">Archives</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="nav-link text-center text-xs font-mono font-bold bg-white text-black py-3 rounded-lg uppercase tracking-widest mt-2 hover:bg-brand-zona transition-colors">Start Project</a>
+            </div>
         </div>
     </nav>
 
@@ -260,24 +301,36 @@
             </div>
         </section>
 
-        <!-- MAIN DECK -->
+        <!-- MAIN DECK (UPDATED FOR MOBILE SIZING & POSITIONS) -->
         <section id="deck" class="min-h-screen py-20 relative flex flex-col items-center justify-center overflow-hidden">
             <div class="mb-32 text-center z-10">
                 <span class="text-brand-zona font-mono text-[10px] uppercase tracking-widest mb-2 block hacker-text" data-value="Interactive Deck">Interactive Deck</span>
                 <h2 class="text-4xl md:text-5xl font-serif text-white">Featured Works</h2>
             </div>
-            <div class="project-deck relative w-[300px] h-[450px] md:w-[400px] md:h-[600px] group perspective-1000">
-                <div id="card-solare" class="holo-card card-yellow absolute top-0 left-0 w-full h-full rounded-xl p-8 flex flex-col justify-between transition-all duration-500 z-10" style="transform: rotate(15deg) translate(80px, 10px);" onmouseenter="audioEngine.play('hover')" onclick="magicOpen('solare')">
+            
+            <!-- Width and Height updated for mobile responsiveness -->
+            <div class="project-deck relative w-[240px] h-[350px] md:w-[400px] md:h-[600px] group perspective-1000">
+                
+                <!-- SOLARE CARD -->
+                <!-- Removed inline transforms, using CSS classes card-solare, etc. for positioning -->
+                <div id="card-solare" class="holo-card card-solare card-yellow absolute top-0 left-0 w-full h-full rounded-xl p-8 flex flex-col justify-between z-10" 
+                     onmouseenter="audioEngine.play('hover')" onclick="magicOpen('solare')">
                     <div class="flex justify-between items-start"><span class="font-mono text-xs text-brand-solare border border-brand-solare/30 px-2 py-1 rounded-full">03</span><span class="iconify text-brand-solare text-xl" data-icon="lucide:arrow-up-right"></span></div>
                     <div class="text-center"><h3 class="text-4xl font-serif text-white mb-2">Solare</h3><p class="font-mono text-xs text-neutral-400 uppercase tracking-widest">Coffee House</p></div>
                     <div class="w-full h-1/2 bg-black/50 rounded-lg overflow-hidden relative"><img src="assets/images/solare.jpg" class="w-full h-full object-cover opacity-80"><div class="absolute inset-0 bg-brand-solare/10 mix-blend-overlay"></div></div>
                 </div>
-                <div id="card-vyne" class="holo-card card-purple absolute top-0 left-0 w-full h-full rounded-xl p-8 flex flex-col justify-between transition-all duration-500 z-20" style="transform: rotate(-10deg) translate(-80px, 10px);" onmouseenter="audioEngine.play('hover')" onclick="magicOpen('vyne')">
+
+                <!-- VYNE CARD -->
+                <div id="card-vyne" class="holo-card card-vyne card-purple absolute top-0 left-0 w-full h-full rounded-xl p-8 flex flex-col justify-between z-20" 
+                     onmouseenter="audioEngine.play('hover')" onclick="magicOpen('vyne')">
                     <div class="flex justify-between items-start"><span class="font-mono text-xs text-brand-vyne border border-brand-vyne/30 px-2 py-1 rounded-full">02</span><span class="iconify text-brand-vyne text-xl" data-icon="lucide:arrow-up-right"></span></div>
                     <div class="text-center"><h3 class="text-4xl font-serif text-white mb-2">Vyne</h3><p class="font-mono text-xs text-neutral-400 uppercase tracking-widest">Athletics</p></div>
                     <div class="w-full h-1/2 bg-black/50 rounded-lg overflow-hidden relative"><img src="assets/images/vyne.jpg" class="w-full h-full object-cover opacity-80"><div class="absolute inset-0 bg-brand-vyne/10 mix-blend-overlay"></div></div>
                 </div>
-                <div id="card-zona" class="holo-card card-lime absolute top-0 left-0 w-full h-full rounded-xl p-8 flex flex-col justify-between transition-all duration-500 z-30" style="transform: rotate(0deg) translate(0px, -20px);" onmouseenter="audioEngine.play('hover')" onclick="magicOpen('zona')">
+
+                <!-- ZONA CARD -->
+                <div id="card-zona" class="holo-card card-zona card-lime absolute top-0 left-0 w-full h-full rounded-xl p-8 flex flex-col justify-between z-30" 
+                     onmouseenter="audioEngine.play('hover')" onclick="magicOpen('zona')">
                     <div class="flex justify-between items-start"><span class="font-mono text-xs text-brand-zona border border-brand-zona/30 px-2 py-1 rounded-full">01</span><span class="iconify text-brand-zona text-xl" data-icon="lucide:arrow-up-right"></span></div>
                     <div class="text-center"><h3 class="text-4xl font-serif text-white mb-2">Zona</h3><p class="font-mono text-xs text-neutral-400 uppercase tracking-widest">Media & Culture</p></div>
                     <div class="w-full h-1/2 bg-black/50 rounded-lg overflow-hidden relative"><img src="assets/images/zona.png" class="w-full h-full object-cover opacity-80"><div class="absolute inset-0 bg-brand-zona/10 mix-blend-overlay"></div></div>
@@ -554,10 +607,57 @@
             if (!isActive) { element.classList.add('active'); gsap.to(content, { height: "auto", opacity: 1, duration: 0.5, ease: "power2.out" }); }
         }
 
-        const initialCardStates = { zona: { rotate: 0, x: 0, y: -20 }, vyne: { rotate: -6, x: -80, y: 10 }, solare: { rotate: 6, x: 80, y: 10 } };
-        function magicOpen(id) { audioEngine.play('click'); const card = document.getElementById(`card-${id}`); const modal = document.getElementById(`modal-${id}`); gsap.timeline().to(card, { y: -150, z: 100, rotate: 0, x: 0, scale: 1.1, duration: 0.5, ease: "back.out(1.2)" }).to(card, { filter: "brightness(3)", duration: 0.1, onComplete: () => { openModal(modal); gsap.set(card, { opacity: 0 }); } }); }
+        // --- NEW: Toggle Mobile Menu Function ---
+        function toggleMobileMenu() {
+            const dropdown = document.getElementById('nav-dropdown');
+            const btn = document.getElementById('menu-btn');
+            dropdown.classList.toggle('open');
+            if(dropdown.classList.contains('open')) {
+                btn.innerText = "[ CLOSE - ]";
+                btn.classList.add('bg-white', 'text-black');
+            } else {
+                btn.innerText = "[ MENU + ]";
+                btn.classList.remove('bg-white', 'text-black');
+            }
+        }
+
+        // --- UPDATED: Initial state handled by CSS now (removed initialCardStates object) ---
+        function magicOpen(id) { 
+            audioEngine.play('click'); 
+            const card = document.getElementById(`card-${id}`); 
+            const modal = document.getElementById(`modal-${id}`); 
+            
+            gsap.timeline()
+                .to(card, { y: -150, z: 100, rotate: 0, x: 0, scale: 1.1, duration: 0.5, ease: "back.out(1.2)" })
+                .to(card, { filter: "brightness(3)", duration: 0.1, onComplete: () => { openModal(modal); gsap.set(card, { opacity: 0 }); } }); 
+        }
+
         function openModal(modal) { if(!modal) return; modal.classList.add('active'); lenis.stop(); gsap.from(modal.querySelectorAll('.img-container, h2'), { y: 50, opacity: 0, stagger: 0.05, duration: 0.8, ease: "power2.out", delay: 0.3 }); }
-        function closeProject(id) { const modal = document.getElementById(`modal-${id}`); const card = document.getElementById(`card-${id}`); const state = initialCardStates[id]; modal.classList.remove('active'); lenis.start(); gsap.set(card, { opacity: 1, filter: "none" }); gsap.to(card, { x: state.x, y: state.y, rotate: state.rotate, scale: 1, z: 0, duration: 0.6, ease: "power3.out", delay: 0.2 }); }
+        
+        // --- UPDATED: closeProject to calculate return position based on screen width ---
+        function closeProject(id) { 
+            const modal = document.getElementById(`modal-${id}`); 
+            const card = document.getElementById(`card-${id}`); 
+            modal.classList.remove('active'); 
+            lenis.start(); 
+            
+            // Calculate where card should return based on screen size (matching CSS values)
+            const isMobile = window.innerWidth < 768;
+            let targetX = 0, targetY = 0, targetR = 0;
+
+            if (id === 'solare') {
+                targetR = isMobile ? 5 : 15; targetX = isMobile ? 15 : 80; targetY = isMobile ? 5 : 10;
+            } else if (id === 'vyne') {
+                targetR = isMobile ? -5 : -10; targetX = isMobile ? -15 : -80; targetY = isMobile ? 5 : 10;
+            } else { // zona
+                targetR = 0; targetX = 0; targetY = isMobile ? -5 : -20;
+            }
+
+            gsap.set(card, { opacity: 1, filter: "none" }); 
+            // We use GSAP to animate back to the CSS-defined position
+            gsap.to(card, { x: targetX, y: targetY, rotate: targetR, scale: 1, z: 0, duration: 0.6, ease: "power3.out", delay: 0.2, clearProps: "all" }); 
+        }
+
         function openArchive(id) { const modal = document.getElementById(`modal-${id}`); if(!modal) return; modal.classList.add('active'); lenis.stop(); gsap.from(modal.querySelectorAll('.img-container, h2'), { y: 50, opacity: 0, stagger: 0.05, duration: 0.8, ease: "power2.out", delay: 0.3 }); }
         function closeArchive(id) { const modal = document.getElementById(`modal-${id}`); modal.classList.remove('active'); lenis.start(); }
 
