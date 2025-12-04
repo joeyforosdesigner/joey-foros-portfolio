@@ -1,1230 +1,578 @@
 <!DOCTYPE html>
-<html  >
+<html lang="en">
 <head>
-  <!-- Site made with Mobirise Website Builder v6.1.4, https://mobirise.com -->
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Mobirise v6.1.4, mobirise.com">
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-  <link rel="shortcut icon" href="assets/images/logo-jf.png" type="image/x-icon">
-  <meta name="description" content="">
-  
-  
-  <title>Home</title>
-  <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
-  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/animatecss/animate.css">
-  <link rel="stylesheet" href="assets/dropdown/css/style.css">
-  <link rel="stylesheet" href="assets/socicon/css/styles.css">
-  <link rel="stylesheet" href="assets/theme/css/style.css">
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;700&display=swap&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;700&display=swap&display=swap"></noscript>
-  <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css?v=9VxDiH"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css?v=9VxDiH" type="text/css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO & METADATA -->
+    <title>Joey Foros | Strategic Brand Designer & Art Director</title>
+    <meta name="description" content="Joey Foros helps ambitious brands define their future through strategic Identity Design, Art Direction, and Visual Storytelling. Based in Douala, operating globally.">
+    
+    <link rel="shortcut icon" href="assets/images/logo-jf.png" type="image/x-icon">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- LIBRARIES -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['Space Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            zona: '#a3e635', vyne: '#a855f7', solare: '#facc15', print: '#38bdf8', dark: '#050505',
+                        }
+                    },
+                    animation: {
+                        'marquee': 'marquee 30s linear infinite',
+                        'shimmer': 'shimmer 2s linear infinite',
+                    },
+                    keyframes: {
+                        marquee: { '0%': { transform: 'translateX(0%)' }, '100%': { transform: 'translateX(-100%)' } },
+                        shimmer: { '0%': { backgroundPosition: '200% 0' }, '100%': { backgroundPosition: '-200% 0' } }
+                    }
+                }
+            }
+        }
+    </script>
 
-  
-  
-  
+    <style>
+        :root { --cursor-size: 20px; }
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        body { background-color: #030303; cursor: none; overflow-x: hidden; color: #e5e5e5; }
+
+        /* FX */
+        .noise-wrapper {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 90; opacity: 0.05;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        .bg-grid {
+            background-size: 60px 60px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+            position: fixed; inset: 0; z-index: -2; pointer-events: none;
+        }
+
+        /* HOLO CARDS */
+        .project-deck { perspective: 2000px; transform-style: preserve-3d; }
+        .holo-card {
+            background: rgba(20, 20, 20, 0.95); border: 1px solid rgba(255,255,255,0.1);
+            transform-style: preserve-3d; transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s, border-color 0.5s;
+            cursor: none; overflow: hidden; position: relative;
+        }
+        .holo-card::after {
+            content: ""; position: absolute; top: 0; left: -100%; width: 200%; height: 100%;
+            background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.05) 45%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.05) 55%, transparent 60%);
+            animation: shimmer 4s infinite linear; pointer-events: none; z-index: 20;
+        }
+        .card-zona:hover { box-shadow: 0 0 80px rgba(163, 230, 53, 0.5); border-color: #a3e635; z-index: 100 !important; }
+        .card-vyne:hover { box-shadow: 0 0 80px rgba(168, 85, 247, 0.5); border-color: #a855f7; z-index: 100 !important; }
+        .card-solare:hover { box-shadow: 0 0 80px rgba(250, 204, 21, 0.5); border-color: #facc15; z-index: 100 !important; }
+        .card-print:hover { box-shadow: 0 0 80px rgba(56, 189, 248, 0.5); border-color: #38bdf8; z-index: 50; }
+        .project-deck:hover .holo-card:not(:hover) { filter: grayscale(100%) brightness(0.2); transform: scale(0.9) translateZ(-50px); opacity: 0.5; }
+
+        /* MODALS */
+        .project-modal {
+            position: fixed; inset: 0; z-index: 9000; background: #050505;
+            transform: translateY(100%); overflow-y: auto; opacity: 0;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s;
+        }
+        .project-modal.active { transform: translateY(0); opacity: 1; }
+
+        /* --- NEW IMAGE LOGIC (FLUID RESPONSIVE) --- */
+        .img-container { 
+            position: relative; 
+            width: 100%; 
+            height: auto; /* Hauteur auto selon l'image */
+            background: rgba(255,255,255,0.02); 
+            border: 1px solid rgba(255,255,255,0.08); 
+            border-radius: 4px; 
+            overflow: hidden; 
+            display: block;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .img-container img { 
+            width: 100%; 
+            height: auto; /* Garde le ratio */
+            display: block; 
+            object-fit: contain; /* Ne coupe jamais */
+            transition: transform 0.7s ease; 
+        }
+        .img-container:hover { border-color: #a3e635; box-shadow: 0 0 30px rgba(163, 230, 53, 0.15); z-index: 10; }
+        .img-container:hover img { transform: scale(1.02); }
+
+        /* LOGO GRID ITEM */
+        .logo-grid-item {
+            background: rgba(255,255,255,0.03);
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s;
+            position: relative; overflow: hidden; aspect-ratio: 1/1;
+        }
+        .logo-grid-item:hover { background: rgba(163, 230, 53, 0.05); border-color: #facc15; box-shadow: 0 0 30px rgba(250, 204, 21, 0.1); }
+        .logo-grid-item img { width: 80%; height: 80%; object-fit: contain; filter: brightness(1); transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1); }
+        .logo-grid-item:hover img { transform: scale(1.1); }
+
+        /* UTILS */
+        .service-content { height: 0; overflow: hidden; opacity: 0; }
+        .service-item.active .icon-plus { transform: rotate(45deg); color: #a3e635; }
+        .service-item.active .service-title { color: #fff; }
+        #cursor { position: fixed; top: 0; left: 0; width: 20px; height: 20px; border: 1px solid rgba(255, 255, 255, 0.8); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); mix-blend-mode: difference; transition: width 0.3s, height 0.3s; }
+        #cursor-dot { position: fixed; top: 0; left: 0; width: 4px; height: 4px; background: #ccff00; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
+        .sound-widget { position: fixed; bottom: 30px; left: 30px; z-index: 9998; cursor: pointer; font-family: 'Space Mono', monospace; font-size: 10px; color: #666; border: 1px solid #333; padding: 8px 12px; border-radius: 99px; transition: all 0.3s; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); }
+        .sound-widget.active { color: #ccff00; border-color: #ccff00; text-shadow: 0 0 10px rgba(204,255,0,0.5); }
+        .hacker-text { display: inline-block; }
+    </style>
 </head>
-<body>
-  
-  <section data-bs-version="5.1" class="menu menu3 cid-uZEYOfcmag" once="menu" id="menu03-x">
-	
+<body class="antialiased selection:bg-white selection:text-black">
 
-	<nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
-		<div class="container">
-			<div class="navbar-brand">
-				<span class="navbar-logo">
-					<a href="index.html#top">
-						<img src="assets/images/logo-jf.png" alt="Mobirise Website Builder" style="height: 5rem;">
-					</a>
-				</span>
-				
-			</div>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-				<div class="hamburger">
-					<span></span>
-					<span></span>
-					<span></span>
-					<span></span>
-				</div>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item">
-						<a class="nav-link link text-black text-primary display-4" href="index.html#article11-3">Projects</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link link text-black show text-primary display-4" href="index.html#article11-i" aria-expanded="false">Others</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link link text-black text-primary display-4" href="index.html#contacts01-u">Contacts</a>
-					</li></ul>
-				<div class="icons-menu">
-					<a class="iconfont-wrapper" href="tel:+237 654 49 19 84">
-						<span class="p-2 mbr-iconfont mobi-mbri-phone mobi-mbri"></span>
-					</a>
-					<a class="iconfont-wrapper" href="index.html#contacts01-u">
-						<span class="p-2 mbr-iconfont mobi-mbri-letter mobi-mbri"></span>
-					</a>
-					
-					
-				</div>
-				<div class="navbar-buttons mbr-section-btn"><a class="btn btn-black display-4" href="index.html#form02-v">Let's work !</a></div>
-			</div>
-		</div>
-	</nav>
-</section>
-
-<section data-bs-version="5.1" class="header13 cid-uZEL3rqIfg" id="header13-0">
-  
-  
-
-  <div class="align-center container">
-    <div class="row justify-content-center">
-      <div class="col-md-12 mb-5 content-head">
-        <h1 class="mbr-section-title mbr-fonts-style display-1"><strong>Joey Foros</strong></h1>
-        <p class="mbr-text mbr-fonts-style mt-4 display-7">Crafting distinctive visual identities that help brands
-<br>stand out with clarity and purpose.&nbsp;</p>
-        <div class="mbr-section-btn mt-4"><a class="btn btn-white-outline display-7" href="index.html#article11-3">View My Work</a></div>
-      </div>
-    </div>
-
-    <div class="row justify-content-center">
-      <div class="col-12 col-md-8">
-        <img src="assets/images/photo20rs202-1537x478.jpg" alt="Joey foros / Graphic Designer" title="">
-      </div>
-    </div>
-  </div>
-</section>
-
-<section data-bs-version="5.1" class="features10 cid-uZEL8RXfyR" id="features010-1">
-  
-
-  
-  
-  <div class="container">
-    
-    <div class="row justify-content-center">
-      <div class="item features-without-image col-12 col-md-6 col-lg-4 active">
-        <div class="item-wrapper">
-          <div class="card-box align-left">
-            <div class="iconfont-wrapper mb-3">
-              <span class="mbr-iconfont mobi-mbri-change-style mobi-mbri"></span>
+    <!-- PRELOADER -->
+    <div id="preloader" class="fixed inset-0 bg-black z-[10000] flex flex-col items-center justify-center font-mono">
+        <div class="text-xs text-neutral-500 mb-4 absolute top-10 left-10">JOEY FOROS V15.0</div>
+        <div class="flex flex-col items-center">
+            <div class="text-brand-zona text-xs uppercase tracking-widest mb-4 hacker-text" data-value="System Loading...">System Loading...</div>
+            <div id="preloader-count" class="text-white text-6xl md:text-8xl font-bold opacity-80">00%</div>
+            <div class="w-64 h-[1px] bg-white/10 mt-8 relative overflow-hidden">
+                <div id="preloader-bar" class="absolute top-0 left-0 h-full w-0 bg-brand-zona shadow-[0_0_20px_rgba(163,230,53,0.8)]"></div>
             </div>
-            <p class="card-title mbr-fonts-style mb-3 display-1">
-              <strong>7</strong></p>
-            <p class="card-text mbr-fonts-style mb-3 display-7">Years Experience</p>
-            
-          </div>
-        </div>
-      </div><div class="item features-without-image col-12 col-md-6 col-lg-4">
-        <div class="item-wrapper">
-          <div class="card-box align-left">
-            <div class="iconfont-wrapper mb-3">
-              <span class="mbr-iconfont mobi-mbri-smile-face mobi-mbri"></span>
-            </div>
-            <p class="card-title mbr-fonts-style mb-3 display-1"><strong>50+</strong>
-            </p>
-            <p class="card-text mbr-fonts-style mb-3 display-7">Satisfied Clients</p>
-            
-          </div>
-        </div>
-      </div>
-      
-      <div class="item features-without-image col-12 col-md-6 col-lg-4">
-        <div class="item-wrapper">
-          <div class="card-box align-left">
-            <div class="iconfont-wrapper mb-3">
-              <span class="mbr-iconfont mobi-mbri-growing-chart mobi-mbri"></span>
-            </div>
-            <p class="card-title mbr-fonts-style mb-3 display-1"><strong>100+</strong>
-            </p>
-            <p class="card-text mbr-fonts-style mb-3 display-7">Projects Completed</p>
-            
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section data-bs-version="5.1" class="gallery10 cid-uZELbNrmIc" id="gallery10-2">
-  
-
-
-  <div class="container-fluid">
-
-      <div class="loop-container">
-        <div class="item display-1" data-linewords="Brand Identity * Visual Strategy * Creative Direction * Graphic Design * Client Focused * Impactful Results *" data-direction="-1" data-speed="0.06">☁️ Best offers ☁️ Free delivery ☁️ Perfect design ☁️ Comfort ☁️ Support 24/7 ☁️ Vibes</div>
-
-        <div class="item display-1" data-linewords="Brand Identity * Visual Strategy * Creative Direction * Graphic Design * Client Focused * Impactful Results *" data-direction="-1" data-speed="0.06">☁️ Best offers ☁️ Free delivery ☁️ Perfect design ☁️ Comfort ☁️ Support 24/7 ☁️ Vibes</div>
-      </div>
-    
-  </div>
-</section>
-
-<section data-bs-version="5.1" class="article11 cid-uZELl9lZqi" id="article11-3">
-    
-
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="title col-md-12 col-lg-10">
-                <h3 class="mbr-section-title mbr-fonts-style align-center mt-0 mb-0 display-2"><strong>Featured Design Projects</strong></h3>
-                <h4 class="mbr-section-subtitle align-center mbr-fonts-style mt-4 display-7">A curated selection of visual identities, brand concepts, and creative works that showcase my design expertise.</h4>
-                
-            </div>
+            <div class="mt-4 text-[10px] text-neutral-600 animate-pulse" id="audio-status">[ CLICK FOR SOUND ]</div>
         </div>
     </div>
-</section>
 
-<section data-bs-version="5.1" class="features031 cid-uZELKRTyK7" id="features031-4">
-    
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12 content-head mb-5">
-                <h1 class="mbr-section-title mbr-fonts-style mb-0 display-2">
-                    <strong>PROJECT 1: ZONA RECORDS</strong></h1>
-                
+    <div id="sound-toggle" class="sound-widget" onclick="toggleAudio()">[ SOUND: OFF ]</div>
+    <div class="noise-wrapper"></div>
+    <div class="bg-grid"></div>
+    <canvas id="canvas-bg" class="fixed inset-0 z-[-1] pointer-events-none opacity-40"></canvas>
+    <div id="cursor"></div>
+    <div id="cursor-dot"></div>
+
+    <!-- NAV -->
+    <nav class="fixed top-6 left-0 w-full z-50 flex justify-center px-4">
+        <div class="bg-black/80 backdrop-blur-xl border border-white/10 rounded-full px-2 p-2 flex items-center justify-between gap-2 w-auto max-w-2xl shadow-2xl">
+            <a href="#" class="cursor-pointer hover:scale-105 transition-transform bg-white/5 rounded-full p-2 w-10 h-10 flex items-center justify-center border border-white/10 magnetic-btn">
+                <img src="assets/images/logo-jf.png" alt="Logo" class="h-4 w-auto invert brightness-200">
+            </a>
+            <div class="hidden md:flex gap-1 px-4">
+                <a href="#about" class="nav-link text-[10px] font-mono text-neutral-400 hover:text-white hover:bg-white/5 px-4 py-2 rounded-full uppercase tracking-widest transition-all cursor-pointer magnetic-btn hacker-text" data-value="Studio">Studio</a>
+                <a href="#deck" class="nav-link text-[10px] font-mono text-neutral-400 hover:text-white hover:bg-white/5 px-4 py-2 rounded-full uppercase tracking-widest transition-all cursor-pointer magnetic-btn hacker-text" data-value="Work">Work</a>
+                <a href="#archives" class="nav-link text-[10px] font-mono text-neutral-400 hover:text-white hover:bg-white/5 px-4 py-2 rounded-full uppercase tracking-widest transition-all cursor-pointer magnetic-btn hacker-text" data-value="Archives">Archives</a>
             </div>
+            <a href="#contact" class="nav-link bg-white text-black text-[10px] font-mono font-bold uppercase tracking-widest px-6 py-2.5 rounded-full hover:bg-brand-zona transition-colors cursor-pointer border border-white magnetic-btn">Start</a>
         </div>
-        <div class="row justify-content-center  blockContent">
-            <div class="col-12 col-lg">
-                <div class="item-wrapper align-left">
-                    <div class="counter-container mbr-text mbr-fonts-style display-7">
-                        <ul>
-                            <li><strong>Industry:&nbsp;</strong>Rap &amp; RnB Media</li>
-                            <li><strong>Objective:</strong>&nbsp;Build a bold and streetwear inspired visual identity that stands out from the usual trends while staying easily recognizable.</li>
-                            <li><strong>Creation:</strong>&nbsp;Complete visual identity from the logo to the graphic system.</li>
-                        </ul>
+    </nav>
+
+    <main id="smooth-content">
+        <!-- HEADER -->
+        <header class="relative min-h-screen flex flex-col justify-center items-center pt-24 pb-12 px-6">
+            <div class="max-w-6xl w-full text-center relative z-10 flex flex-col items-center">
+                <div class="gsap-fade-in mb-8 flex flex-col items-center gap-4 opacity-0 translate-y-10">
+                    <div class="flex items-center gap-2 border border-white/10 bg-white/5 px-3 py-1 rounded-full backdrop-blur-md">
+                        <div class="w-2 h-2 rounded-full bg-brand-zona animate-pulse shadow-[0_0_10px_#a3e635]"></div>
+                        <span class="text-[10px] font-mono uppercase tracking-widest text-neutral-400 hacker-text" data-value="Available Now">Available Now</span>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 col-lg-6">
-                <div class="image-wrapper">
-                    <img class="w-100" src="assets/images/zona.png" alt="Mobirise Website Builder">
+                <div class="hero-title overflow-hidden mb-8 pt-2 pb-14 md:pb-20 px-2 magnetic-parent">
+                    <h1 id="main-title" class="text-[13vw] md:text-[11rem] leading-[0.9] font-serif tracking-tighter text-white mix-blend-overlay opacity-90 select-none cursor-default">Joey Foros</h1>
                 </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="gallery3 cid-uZELRWqoLt" id="gallery03-5">
-    
-    
-    <div class="container-fluid">
-      <div class="row justify-content-center">
-        <div class="col-12 content-head">
-          <div class="mbr-section-head mb-5">
-            <h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-7">The creative direction started with an exploration of streetwear visual codes bold typography, sharp contrasts, and minimal compositions inspired by underground culture. I wanted the identity to speak to a young, expressive audience while keeping a professional and recognizable aesthetic.</h4>
-            
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/zona-records-1.jpg" alt="Mobirise Website Builder" title="" data-slide-to="0" data-bs-slide-to="0">
-            </div>
-            
-          </div>
-        </div>
-        <div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/carte-de-visite-zona.png" alt="Mobirise Website Builder" title="" data-slide-to="1" data-bs-slide-to="1">
-            </div>
-            
-          </div>
-        </div>
-        <div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/post-2-zona.png" alt="Mobirise Website Builder" title="" data-slide-to="2" data-bs-slide-to="2">
-            </div>
-            
-          </div>
-        </div>
-        
-      </div>
-    </div>
-  </section>
-
-<section data-bs-version="5.1" class="gallery3 cid-uZEOLqknOX" id="gallery03-b">
-    
-    
-    <div class="container-fluid">
-      <div class="row justify-content-center">
-        <div class="col-12 content-head">
-          <div class="mbr-section-head mb-5">
-            <h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-7">The lime green color was chosen for its high energy and visibility, balancing perfectly with black to bring a modern yet raw visual feel.</h4>
-            
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/story-2-zona.png" alt="Mobirise Website Builder" title="" data-slide-to="0" data-bs-slide-to="0">
-            </div>
-            
-          </div>
-        </div>
-        <div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/story-3-zona.png" alt="Mobirise Website Builder" title="" data-slide-to="1" data-bs-slide-to="1">
-            </div>
-            
-          </div>
-        </div>
-        <div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/story-1-zona.png" alt="Mobirise Website Builder" title="" data-slide-to="2" data-bs-slide-to="2">
-            </div>
-            
-          </div>
-        </div>
-        
-      </div>
-    </div>
-  </section>
-
-<section data-bs-version="5.1" class="gallery3 cid-uZEPfvprhU" id="gallery03-c">
-    
-    
-    <div class="container-fluid">
-      <div class="row justify-content-center">
-        <div class="col-12 content-head">
-          <div class="mbr-section-head mb-5">
-            <h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-4"><strong>Design Details:
-</strong><div><strong>
-</strong></div><br><div>1- The lime green accent was used to represent vitality and creativity.</div><div>
-</div><div>2- The black base reinforces authority and contrast.</div><div>
-</div><div>3- The logo spacing was slightly tightened to give it a more urban feel.
-</div><div>4- The shapes and rhythm of the typography subtly evoke sound waves, connecting back to music.</div><div>
-</div><div>
-</div><div>
-</div></h4>
-            
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="item features-image col-12 col-md-6 col-lg-6">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/post-3-zona.png" alt="Mobirise Website Builder" title="" data-slide-to="0" data-bs-slide-to="0">
-            </div>
-            
-          </div>
-        </div>
-        <div class="item features-image col-12 col-md-6 col-lg-6">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/post1-zona.png" alt="Mobirise Website Builder" title="" data-slide-to="1" data-bs-slide-to="1">
-            </div>
-            
-          </div>
-        </div>
-        
-        
-      </div>
-    </div>
-  </section>
-
-<section data-bs-version="5.1" class="article11 cid-uZENjc99YM" id="article11-7">
-    
-
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="title col-md-12 col-lg-10">
-                
-                <h4 class="mbr-section-subtitle align-center mbr-fonts-style mt-4 display-7">A bold and authentic identity that visually resonates with the rap and RnB community, giving Zona Records a signature streetwear personality.</h4>
-                
-            </div>
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="features031 cid-uZENmGaRLU" id="features031-8">
-    
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12 content-head mb-5">
-                <h1 class="mbr-section-title mbr-fonts-style mb-0 display-1"><strong>PROJECT 2: VYNE</strong></h1>
-                
-            </div>
-        </div>
-        <div class="row justify-content-center  blockContent">
-            <div class="col-12 col-lg">
-                <div class="item-wrapper align-left">
-                    <div class="counter-container mbr-text mbr-fonts-style display-7">
-                        <ul>
-                            <li><strong>Industry: </strong>Streetwear &amp; Sports Fashion</li><li><strong>Objective: </strong>Build a powerful brand image that reflects strength and high perceived value within the streetwear culture.</li><li><strong>Creation: </strong>Logo design and a promotional visual series to enhance brand identity and awareness.</li>
-                        </ul>
-                    </div>
+                <p class="gsap-fade-in text-base md:text-xl text-neutral-400 font-light max-w-xl mx-auto mb-16 leading-relaxed opacity-0 translate-y-10">
+                    Strategic Brand Designer & Art Director. <br>I turn <span class="text-brand-zona font-serif italic">business goals</span> into visual dominance.
+                </p>
+                <div class="reveal delay-300 w-full max-w-4xl border-t border-b border-white/10 py-6 grid grid-cols-3 gap-4 mb-12">
+                    <div class="text-center group"><span class="block text-2xl md:text-3xl font-serif text-white mb-1">7+</span><span class="text-[9px] font-mono uppercase text-neutral-500">Years Exp.</span></div>
+                    <div class="text-center border-x border-white/10 group"><span class="block text-2xl md:text-3xl font-serif text-white mb-1">50+</span><span class="text-[9px] font-mono uppercase text-neutral-500">Clients</span></div>
+                    <div class="text-center group"><span class="block text-2xl md:text-3xl font-serif text-white mb-1">100+</span><span class="text-[9px] font-mono uppercase text-neutral-500">Projects</span></div>
                 </div>
+                <div class="gsap-fade-in mt-4 animate-bounce relative z-10 opacity-0 translate-y-10"><span class="iconify text-white/30 text-2xl" data-icon="lucide:arrow-down"></span></div>
             </div>
-            <div class="col-12 col-lg-7">
-                <div class="image-wrapper">
-                    <img class="w-100" src="assets/images/vyne.jpg" alt="Mobirise Website Builder">
-                </div>
+        </header>
+
+        <!-- MARQUEE -->
+        <div class="w-full border-y border-white/5 overflow-hidden py-10 mb-20 bg-white/[0.01] flex group">
+            <div class="flex animate-marquee whitespace-nowrap min-w-full flex-shrink-0 group-hover:[animation-play-state:paused]">
+                <span class="text-6xl md:text-8xl font-serif text-stroke mx-8 italic opacity-40 hover:opacity-100 hover:text-brand-zona transition-all duration-300">Identity * Strategy * Growth * </span>
+                <span class="text-6xl md:text-8xl font-serif text-stroke mx-8 italic opacity-40 hover:opacity-100 hover:text-brand-zona transition-all duration-300">Identity * Strategy * Growth * </span>
             </div>
-
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="gallery05 cid-uZENXq2rax" id="gallery05-a">
-    
-
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12 content-head mb-5">
-                <h1 class="mbr-section-title mbr-fonts-style mb-0 display-7">For Vyne, I wanted to merge the spirit of streetwear with athletic confidence. The process began with a study of strong, geometric shapes often found in sports branding. I leaned towards darker tones to convey power, ambition, and exclusivity an identity that feels premium yet approachable.</h1>
-                
+            <div class="flex animate-marquee whitespace-nowrap min-w-full flex-shrink-0 group-hover:[animation-play-state:paused]">
+                <span class="text-6xl md:text-8xl font-serif text-stroke mx-8 italic opacity-40 hover:opacity-100 hover:text-brand-zona transition-all duration-300">Identity * Strategy * Growth * </span>
+                <span class="text-6xl md:text-8xl font-serif text-stroke mx-8 italic opacity-40 hover:opacity-100 hover:text-brand-zona transition-all duration-300">Identity * Strategy * Growth * </span>
             </div>
         </div>
-        <div class="row justify-content-center  blockContent">
-            <div class="col-12 col-lg-6">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 active">
-                        <div class="item-wrapper">
-                            <div class="item-img">
-                                <img src="assets/images/poster-vyne-2.jpg" alt="Mobirise Website Builder" title="" data-slide-to="0" data-bs-slide-to="0" class="smallImage">
-                            </div>
 
+        <!-- ABOUT & SERVICES -->
+        <section id="about" class="py-24 max-w-6xl mx-auto px-6 mb-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+                <div class="glass-panel p-8 md:p-12 rounded-xl border border-white/5 relative group reveal">
+                    <div class="absolute -top-4 -left-4 w-20 h-20 border-t border-l border-brand-zona/30 hidden md:block"></div>
+                    <div class="flex items-center gap-6 mb-8">
+                        <div class="w-24 h-24 rounded-sm overflow-hidden border border-white/10 relative">
+                            <img src="assets/images/Joey foros profile picture.jpg" alt="Joey Foros" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
                         </div>
+                        <div><h2 class="text-3xl font-serif text-white mb-1">The Studio</h2><p class="text-[10px] font-mono text-brand-zona uppercase tracking-widest">Douala, Cameroon</p></div>
                     </div>
-                    <div class="col-md-6 col-xs-12 col-sm-12 col-lg-6">
-                        <div class="item-wrapper">
-                            <div class="item-img">
-                                <img src="assets/images/poster-vyne-1.jpg" alt="Mobirise Website Builder" title="" data-slide-to="1" data-bs-slide-to="1" class="smallImage">
-                            </div>
+                    <div class="space-y-6 text-neutral-400 font-light leading-relaxed">
+                        <p>I am Joey Foros, a digital craftsman obsessed with the intersection of <span class="text-white">technology and emotion</span>. I engineer visual systems that solve business problems.</p>
+                        <p>My approach is rooted in strategy. Every pixel serves a purpose. I partner with ambitious brands to define their place in the future.</p>
+                    </div>
+                    <div class="mt-8 pt-8 border-t border-white/10">
+                        <a href="#contact" class="nav-link inline-flex items-center gap-2 text-white hover:text-brand-zona transition-colors font-mono text-xs uppercase tracking-widest group-hover:translate-x-2 transition-transform duration-300">Book a Consultation <span class="iconify" data-icon="lucide:arrow-right"></span></a>
+                    </div>
+                </div>
 
-                        </div>
+                <div class="space-y-2 reveal delay-100" id="services-accordion">
+                    <h2 class="text-xl font-mono text-white mb-8 border-l-2 border-brand-zona pl-4">Capabilities</h2>
+                    <div class="service-item group border-b border-white/10" onclick="toggleService(this)">
+                        <div class="py-6 hover:bg-white/5 px-4 transition-colors cursor-pointer flex justify-between items-center" onmouseenter="audioEngine.play('hover')"><h3 class="text-2xl font-serif text-neutral-400 service-title group-hover:translate-x-2 transition-all">Branding</h3><div class="flex items-center gap-4"><span class="text-[10px] font-mono text-brand-zona">01</span><span class="iconify icon-plus text-neutral-600 transition-transform duration-300" data-icon="lucide:plus"></span></div></div>
+                        <div class="service-content px-4"><div class="pb-6 text-neutral-400 font-light text-sm leading-relaxed space-y-4"><p>Comprehensive brand systems. Logo design, typography, color palettes.</p><a href="#contact" class="nav-link inline-block text-brand-zona border border-brand-zona/30 px-4 py-2 rounded-full font-mono text-[10px] hover:bg-brand-zona hover:text-black transition-colors">GET THIS SERVICE</a></div></div>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <div class="item-wrapper">
-                            <div class="item-img">
-                                <img src="assets/images/poster-vyne-5.jpg" alt="Mobirise Website Builder" title="" data-slide-to="2" data-bs-slide-to="2" class="smallImage">
+                    <div class="service-item group border-b border-white/10" onclick="toggleService(this)">
+                        <div class="py-6 hover:bg-white/5 px-4 transition-colors cursor-pointer flex justify-between items-center" onmouseenter="audioEngine.play('hover')"><h3 class="text-2xl font-serif text-neutral-400 service-title group-hover:translate-x-2 transition-all">Social Media Design</h3><div class="flex items-center gap-4"><span class="text-[10px] font-mono text-brand-zona">02</span><span class="iconify icon-plus text-neutral-600 transition-transform duration-300" data-icon="lucide:plus"></span></div></div>
+                        <div class="service-content px-4"><div class="pb-6 text-neutral-400 font-light text-sm leading-relaxed space-y-4"><p>High-conversion assets for Instagram, LinkedIn and Facebook.</p><a href="#contact" class="nav-link inline-block text-brand-zona border border-brand-zona/30 px-4 py-2 rounded-full font-mono text-[10px] hover:bg-brand-zona hover:text-black transition-colors">GET THIS SERVICE</a></div></div>
+                    </div>
+                    <div class="service-item group border-b border-white/10" onclick="toggleService(this)">
+                        <div class="py-6 hover:bg-white/5 px-4 transition-colors cursor-pointer flex justify-between items-center" onmouseenter="audioEngine.play('hover')"><h3 class="text-2xl font-serif text-neutral-400 service-title group-hover:translate-x-2 transition-all">Poster Design</h3><div class="flex items-center gap-4"><span class="text-[10px] font-mono text-brand-zona">03</span><span class="iconify icon-plus text-neutral-600 transition-transform duration-300" data-icon="lucide:plus"></span></div></div>
+                        <div class="service-content px-4"><div class="pb-6 text-neutral-400 font-light text-sm leading-relaxed space-y-4"><p>Striking visuals for events, advertising, and artistic expression.</p><a href="#contact" class="nav-link inline-block text-brand-zona border border-brand-zona/30 px-4 py-2 rounded-full font-mono text-[10px] hover:bg-brand-zona hover:text-black transition-colors">GET THIS SERVICE</a></div></div>
+                    </div>
+                    <div class="service-item group border-b border-white/10" onclick="toggleService(this)">
+                        <div class="py-6 hover:bg-white/5 px-4 transition-colors cursor-pointer flex justify-between items-center" onmouseenter="audioEngine.play('hover')"><h3 class="text-2xl font-serif text-neutral-400 service-title group-hover:translate-x-2 transition-all">Art Direction</h3><div class="flex items-center gap-4"><span class="text-[10px] font-mono text-brand-zona">04</span><span class="iconify icon-plus text-neutral-600 transition-transform duration-300" data-icon="lucide:plus"></span></div></div>
+                        <div class="service-content px-4"><div class="pb-6 text-neutral-400 font-light text-sm leading-relaxed space-y-4"><p>Guiding the overall visual tone. From photoshoots to campaign rollouts.</p><a href="#contact" class="nav-link inline-block text-brand-zona border border-brand-zona/30 px-4 py-2 rounded-full font-mono text-[10px] hover:bg-brand-zona hover:text-black transition-colors">GET THIS SERVICE</a></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAIN DECK -->
+        <section id="deck" class="min-h-screen py-20 relative flex flex-col items-center justify-center overflow-hidden">
+            <div class="mb-32 text-center z-10">
+                <span class="text-brand-zona font-mono text-[10px] uppercase tracking-widest mb-2 block hacker-text" data-value="Interactive Deck">Interactive Deck</span>
+                <h2 class="text-4xl md:text-5xl font-serif text-white">Featured Works</h2>
+            </div>
+            <div class="project-deck relative w-[300px] h-[450px] md:w-[400px] md:h-[600px] group perspective-1000">
+                <div id="card-solare" class="holo-card card-yellow absolute top-0 left-0 w-full h-full rounded-xl p-8 flex flex-col justify-between transition-all duration-500 z-10" style="transform: rotate(15deg) translate(80px, 10px);" onmouseenter="audioEngine.play('hover')" onclick="magicOpen('solare')">
+                    <div class="flex justify-between items-start"><span class="font-mono text-xs text-brand-solare border border-brand-solare/30 px-2 py-1 rounded-full">03</span><span class="iconify text-brand-solare text-xl" data-icon="lucide:arrow-up-right"></span></div>
+                    <div class="text-center"><h3 class="text-4xl font-serif text-white mb-2">Solare</h3><p class="font-mono text-xs text-neutral-400 uppercase tracking-widest">Coffee House</p></div>
+                    <div class="w-full h-1/2 bg-black/50 rounded-lg overflow-hidden relative"><img src="assets/images/solare.jpg" class="w-full h-full object-cover opacity-80"><div class="absolute inset-0 bg-brand-solare/10 mix-blend-overlay"></div></div>
+                </div>
+                <div id="card-vyne" class="holo-card card-purple absolute top-0 left-0 w-full h-full rounded-xl p-8 flex flex-col justify-between transition-all duration-500 z-20" style="transform: rotate(-10deg) translate(-80px, 10px);" onmouseenter="audioEngine.play('hover')" onclick="magicOpen('vyne')">
+                    <div class="flex justify-between items-start"><span class="font-mono text-xs text-brand-vyne border border-brand-vyne/30 px-2 py-1 rounded-full">02</span><span class="iconify text-brand-vyne text-xl" data-icon="lucide:arrow-up-right"></span></div>
+                    <div class="text-center"><h3 class="text-4xl font-serif text-white mb-2">Vyne</h3><p class="font-mono text-xs text-neutral-400 uppercase tracking-widest">Athletics</p></div>
+                    <div class="w-full h-1/2 bg-black/50 rounded-lg overflow-hidden relative"><img src="assets/images/vyne.jpg" class="w-full h-full object-cover opacity-80"><div class="absolute inset-0 bg-brand-vyne/10 mix-blend-overlay"></div></div>
+                </div>
+                <div id="card-zona" class="holo-card card-lime absolute top-0 left-0 w-full h-full rounded-xl p-8 flex flex-col justify-between transition-all duration-500 z-30" style="transform: rotate(0deg) translate(0px, -20px);" onmouseenter="audioEngine.play('hover')" onclick="magicOpen('zona')">
+                    <div class="flex justify-between items-start"><span class="font-mono text-xs text-brand-zona border border-brand-zona/30 px-2 py-1 rounded-full">01</span><span class="iconify text-brand-zona text-xl" data-icon="lucide:arrow-up-right"></span></div>
+                    <div class="text-center"><h3 class="text-4xl font-serif text-white mb-2">Zona</h3><p class="font-mono text-xs text-neutral-400 uppercase tracking-widest">Media & Culture</p></div>
+                    <div class="w-full h-1/2 bg-black/50 rounded-lg overflow-hidden relative"><img src="assets/images/zona.png" class="w-full h-full object-cover opacity-80"><div class="absolute inset-0 bg-brand-zona/10 mix-blend-overlay"></div></div>
+                </div>
+            </div>
+            <p class="mt-20 text-neutral-600 font-mono text-[10px] animate-pulse">Select a card to reveal</p>
+        </section>
+
+        <!-- ARCHIVES -->
+        <section id="archives" class="py-32 bg-black border-t border-white/10">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex justify-between items-end mb-20 reveal">
+                    <div><h2 class="text-4xl md:text-5xl font-serif text-white mb-2">Visual Archives</h2><p class="text-neutral-500 font-mono text-xs">Explore the vault</p></div>
+                    <div class="hidden md:block w-32 h-[1px] bg-brand-zona"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 archive-grid">
+                    <div class="holo-card card-lime rounded-xl p-0 h-[400px] flex flex-col relative group overflow-hidden" onclick="openArchive('posters'); audioEngine.play('click')" onmouseenter="audioEngine.play('hover')">
+                        <div class="absolute top-0 left-0 w-full p-6 z-20 bg-gradient-to-b from-black/80 to-transparent flex justify-between items-start"><h3 class="text-3xl font-serif text-white group-hover:translate-x-2 transition-transform">Posters<br>Design</h3><span class="font-mono text-brand-zona text-xs">01</span></div>
+                        <img src="assets/images/poster-4.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                    <div class="holo-card card-purple rounded-xl p-0 h-[400px] flex flex-col relative group overflow-hidden" onclick="openArchive('social'); audioEngine.play('click')" onmouseenter="audioEngine.play('hover')">
+                        <div class="absolute top-0 left-0 w-full p-6 z-20 bg-gradient-to-b from-black/80 to-transparent flex justify-between items-start"><h3 class="text-3xl font-serif text-white group-hover:translate-x-2 transition-transform">Social<br>Media</h3><span class="font-mono text-brand-vyne text-xs">02</span></div>
+                        <img src="assets/images/nike-glace.jpeg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                    <div class="holo-card card-yellow rounded-xl p-0 h-[400px] flex flex-col relative group overflow-hidden" onclick="openArchive('logos'); audioEngine.play('click')" onmouseenter="audioEngine.play('hover')">
+                        <div class="absolute top-0 left-0 w-full p-6 z-20 bg-gradient-to-b from-black/80 to-transparent flex justify-between items-start"><h3 class="text-3xl font-serif text-white group-hover:translate-x-2 transition-transform">Logo<br>Folio</h3><span class="font-mono text-brand-solare text-xs">03</span></div>
+                        <div class="absolute inset-0 bg-white/5 flex items-center justify-center"><div class="grid grid-cols-2 gap-4 w-3/4 opacity-80 group-hover:opacity-100 transition-opacity"><img src="assets/images/toasty.jpg" class="rounded-sm shadow-lg"><img src="assets/images/ghosty.jpg" class="rounded-sm shadow-lg"><img src="assets/images/logan.png" class="rounded-sm shadow-lg bg-white/10 p-2"><img src="assets/images/waldo.png" class="rounded-sm shadow-lg bg-white/10 p-2"></div></div>
+                    </div>
+                    <div class="holo-card card-print rounded-xl p-0 h-[400px] flex flex-col relative group overflow-hidden" onclick="openArchive('print'); audioEngine.play('click')" onmouseenter="audioEngine.play('hover')">
+                        <div class="absolute top-0 left-0 w-full p-6 z-20 bg-gradient-to-b from-black/80 to-transparent flex justify-between items-start"><h3 class="text-3xl font-serif text-white group-hover:translate-x-2 transition-transform">Print<br>& Edit</h3><span class="font-mono text-brand-print text-xs">04</span></div>
+                        <img src="assets/images/adfant-badge-1.jpeg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========= MODALS WITH FLUID RESPONSIVE GRID ========= -->
+        
+        <!-- MODAL ZONA -->
+        <div id="modal-zona" class="project-modal bg-black" data-lenis-prevent="true">
+            <div class="sticky top-0 z-50 flex justify-between items-center p-6 bg-black/90 backdrop-blur-md border-b border-brand-zona/20">
+                <span class="text-brand-zona font-mono text-xl font-bold">ZONA RECORDS</span>
+                <button onclick="closeProject('zona'); audioEngine.play('click')" class="text-white hover:text-brand-zona font-mono uppercase">[ CLOSE ]</button>
+            </div>
+            <div class="w-full max-w-[95vw] mx-auto p-6 md:p-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16 max-w-5xl mx-auto">
+                    <div>
+                        <h2 class="text-6xl md:text-8xl font-serif text-white leading-[0.9] mb-6">Underground<br><span class="text-brand-zona italic">Culture</span></h2>
+                        <p class="text-neutral-400 font-light leading-relaxed mb-6">A complete visual identity overhaul for Zona Records.</p>
+                        <a href="#contact" onclick="closeProject('zona')" class="nav-link inline-block bg-brand-zona text-black px-6 py-3 font-mono text-xs uppercase tracking-widest hover:bg-white transition-colors">Start Similar Project</a>
+                    </div>
+                    <div class="font-mono text-xs text-neutral-500 space-y-2 border-l border-white/10 pl-6"><p>CLIENT: ZONA RECORDS</p><p>YEAR: 2024</p><p>SERVICES: IDENTITY, SOCIAL, PRINT</p></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+                    <div class="img-container"><img src="assets/images/zona.png"></div>
+                    <div class="img-container"><img src="assets/images/zona-records-1.jpg"></div>
+                    <div class="img-container"><img src="assets/images/carte-de-visite-zona.png"></div>
+                    <div class="img-container"><img src="assets/images/post-2-zona.png"></div>
+                    <div class="img-container"><img src="assets/images/story-2-zona.png"></div>
+                    <div class="img-container"><img src="assets/images/post-3-zona.png"></div>
+                </div>
+                <div class="text-center mt-20 pb-20"><a href="#contact" onclick="closeProject('zona')" class="nav-link text-white text-4xl font-serif hover:text-brand-zona transition-colors">Let's work together <span class="iconify inline" data-icon="lucide:arrow-right"></span></a></div>
+            </div>
+        </div>
+
+        <!-- MODAL VYNE -->
+        <div id="modal-vyne" class="project-modal bg-black" data-lenis-prevent="true">
+             <div class="sticky top-0 z-50 flex justify-between items-center p-6 bg-black/90 backdrop-blur-md border-b border-brand-vyne/20">
+                <span class="text-brand-vyne font-mono text-xl font-bold">VYNE ATHLETICS</span>
+                <button onclick="closeProject('vyne'); audioEngine.play('click')" class="text-white hover:text-brand-vyne font-mono uppercase">[ CLOSE ]</button>
+            </div>
+            <div class="w-full max-w-[95vw] mx-auto p-6 md:p-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16 max-w-5xl mx-auto">
+                    <div>
+                        <h2 class="text-6xl md:text-8xl font-serif text-white leading-[0.9] mb-6">Power &<br><span class="text-brand-vyne italic">Motion</span></h2>
+                        <p class="text-neutral-400 font-light leading-relaxed mb-6">Bold typography meets dynamic imagery.</p>
+                        <a href="#contact" onclick="closeProject('vyne')" class="nav-link inline-block bg-brand-vyne text-white px-6 py-3 font-mono text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-colors">Start Similar Project</a>
+                    </div>
+                    <div class="font-mono text-xs text-neutral-500 space-y-2 border-l border-white/10 pl-6"><p>CLIENT: VYNE</p><p>YEAR: 2023</p><p>SERVICES: BRANDING, ART DIRECTION</p></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+                    <div class="img-container"><img src="assets/images/vyne.jpg" alt="Vyne Branding"></div>
+                    <div class="img-container"><img src="assets/images/poster-vyne-2.jpg"></div>
+                    <div class="img-container"><img src="assets/images/poster-vyne-1.jpg"></div>
+                    <div class="img-container"><img src="assets/images/poster-vyne-5.jpg"></div>
+                    <div class="img-container"><img src="assets/images/poster-vyne-3.jpg"></div>
+                    <div class="img-container"><img src="assets/images/poster-vyne-4.jpg"></div>
+                </div>
+                <div class="text-center mt-20 pb-20"><a href="#contact" onclick="closeProject('vyne')" class="nav-link text-white text-4xl font-serif hover:text-brand-vyne transition-colors">Let's work together <span class="iconify inline" data-icon="lucide:arrow-right"></span></a></div>
+            </div>
+        </div>
+
+        <!-- MODAL SOLARE -->
+        <div id="modal-solare" class="project-modal bg-black" data-lenis-prevent="true">
+             <div class="sticky top-0 z-50 flex justify-between items-center p-6 bg-black/90 backdrop-blur-md border-b border-brand-solare/20">
+                <span class="text-brand-solare font-mono text-xl font-bold">SOLARE COFFEE</span>
+                <button onclick="closeProject('solare'); audioEngine.play('click')" class="text-white hover:text-brand-solare font-mono uppercase">[ CLOSE ]</button>
+            </div>
+            <div class="w-full max-w-[95vw] mx-auto p-6 md:p-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16 max-w-5xl mx-auto">
+                    <div>
+                        <h2 class="text-6xl md:text-8xl font-serif text-white leading-[0.9] mb-6">Warmth &<br><span class="text-brand-solare italic">Light</span></h2>
+                        <p class="text-neutral-400 font-light leading-relaxed mb-6">Sunny yellow tones with deep, comforting blues.</p>
+                        <a href="#contact" onclick="closeProject('solare')" class="nav-link inline-block bg-brand-solare text-black px-6 py-3 font-mono text-xs uppercase tracking-widest hover:bg-white transition-colors">Start Similar Project</a>
+                    </div>
+                    <div class="font-mono text-xs text-neutral-500 space-y-2 border-l border-white/10 pl-6"><p>CLIENT: SOLARE</p><p>YEAR: 2024</p><p>SERVICES: PACKAGING, IDENTITY</p></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+                     <div class="img-container"><img src="assets/images/solare.jpg"></div>
+                    <div class="img-container"><img src="assets/images/carte-de-visite-solare.jpg"></div>
+                    <div class="img-container"><img src="assets/images/solare-packaging-1.png"></div>
+                    <div class="img-container"><img src="assets/images/solare-post-2.png"></div>
+                    <div class="img-container"><img src="assets/images/solare-post-4.png"></div>
+                    <div class="img-container"><img src="assets/images/solare-post-5.png"></div>
+                </div>
+                <div class="text-center mt-20 pb-20"><a href="#contact" onclick="closeProject('solare')" class="nav-link text-white text-4xl font-serif hover:text-brand-solare transition-colors">Let's work together <span class="iconify inline" data-icon="lucide:arrow-right"></span></a></div>
+            </div>
+        </div>
+
+        <!-- ARCHIVE: POSTERS -->
+        <div id="modal-posters" class="project-modal bg-black" data-lenis-prevent="true">
+            <div class="sticky top-0 z-50 flex justify-between items-center p-6 bg-black/90 backdrop-blur-md border-b border-brand-zona/20">
+                <span class="text-brand-zona font-mono text-xl font-bold">ARCHIVE: POSTERS</span>
+                <button onclick="closeArchive('posters'); audioEngine.play('click')" class="text-white hover:text-brand-zona font-mono uppercase">[ CLOSE ]</button>
+            </div>
+            <div class="w-full max-w-[95vw] mx-auto p-6 md:p-12">
+                <div class="mb-12 border-b border-white/10 pb-8 max-w-5xl mx-auto"><h2 class="text-4xl font-serif text-white">Visual Impact.</h2><p class="text-neutral-400 mt-2">A collection of experimental and commissioned poster art.</p></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+                    <div class="img-container"><img src="assets/images/poster-4.jpg"></div>
+                    <div class="img-container"><img src="assets/images/poster-5.jpeg"></div>
+                    <div class="img-container"><img src="assets/images/poster-7.jpeg"></div>
+                    <div class="img-container"><img src="assets/images/poster-10.jpg"></div>
+                    <div class="img-container"><img src="assets/images/poster-11.jpeg"></div>
+                    <div class="img-container"><img src="assets/images/poster-13.jpg"></div>
+                </div>
+                <div class="text-center mt-12 pb-12"><a href="#contact" onclick="closeArchive('posters')" class="nav-link inline-block border border-white px-8 py-3 text-white font-mono text-xs hover:bg-white hover:text-black transition-colors">COMMISSION A POSTER</a></div>
+            </div>
+        </div>
+
+        <!-- ARCHIVE: SOCIAL -->
+        <div id="modal-social" class="project-modal bg-black" data-lenis-prevent="true">
+            <div class="sticky top-0 z-50 flex justify-between items-center p-6 bg-black/90 backdrop-blur-md border-b border-brand-vyne/20">
+                <span class="text-brand-vyne font-mono text-xl font-bold">ARCHIVE: SOCIAL</span>
+                <button onclick="closeArchive('social'); audioEngine.play('click')" class="text-white hover:text-brand-vyne font-mono uppercase">[ CLOSE ]</button>
+            </div>
+            <div class="w-full max-w-[95vw] mx-auto p-6 md:p-12">
+                <div class="mb-12 border-b border-white/10 pb-8 max-w-5xl mx-auto"><h2 class="text-4xl font-serif text-white">Digital Presence.</h2><p class="text-neutral-400 mt-2">Engaging visuals tailored for the scroll economy.</p></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+                    <div class="img-container"><img src="assets/images/nike-glace.jpeg"></div>
+                    <div class="img-container"><img src="assets/images/lays-poster-2.jpeg"></div>
+                    <div class="img-container"><img src="assets/images/pepsi-affiche-2.jpeg"></div>
+                    <div class="img-container"><img src="assets/images/flyer-st-valentin-3.png"></div>
+                    <div class="img-container"><img src="assets/images/portfolio-4.jpg"></div>
+                    <div class="img-container"><img src="assets/images/img-20250228-wa0005.jpg"></div>
+                </div>
+                <div class="text-center mt-12 pb-12"><a href="#contact" onclick="closeArchive('social')" class="nav-link inline-block border border-white px-8 py-3 text-white font-mono text-xs hover:bg-white hover:text-black transition-colors">BOOST YOUR SOCIALS</a></div>
+            </div>
+        </div>
+
+        <!-- ARCHIVE: LOGOS (BIG 2x2) -->
+        <div id="modal-logos" class="project-modal bg-black" data-lenis-prevent="true">
+            <div class="sticky top-0 z-50 flex justify-between items-center p-6 bg-black/90 backdrop-blur-md border-b border-brand-solare/20">
+                <span class="text-brand-solare font-mono text-xl font-bold">ARCHIVE: LOGOS</span>
+                <button onclick="closeArchive('logos'); audioEngine.play('click')" class="text-white hover:text-brand-solare font-mono uppercase">[ CLOSE ]</button>
+            </div>
+            <div class="w-full max-w-[95vw] mx-auto p-6 md:p-12">
+                <div class="mb-12 border-b border-white/10 pb-8 max-w-5xl mx-auto"><h2 class="text-4xl font-serif text-white">The Marks.</h2><p class="text-neutral-400 mt-2">Distinctive symbols crafted for clarity.</p></div>
+                <!-- 2 COLS LOGOS GRID ON MOBILE AND DESKTOP -->
+                <div class="grid grid-cols-2 gap-4 md:gap-8">
+                    <div class="logo-grid-item rounded-sm"><img src="assets/images/logo-principal-brune-prod.jpg"></div>
+                    <div class="logo-grid-item rounded-sm"><img src="assets/images/toasty.jpg"></div>
+                    <div class="logo-grid-item rounded-sm"><img src="assets/images/ghosty.jpg"></div>
+                    <div class="logo-grid-item rounded-sm"><img src="assets/images/logan.png"></div>
+                    <div class="logo-grid-item rounded-sm"><img src="assets/images/waldo.png"></div>
+                    <div class="logo-grid-item rounded-sm"><img src="assets/images/alligo.png"></div>
+                    <div class="logo-grid-item rounded-sm"><img src="assets/images/omero.png"></div>
+                    <div class="logo-grid-item rounded-sm"><img src="assets/images/corse.png"></div>
+                </div>
+                <div class="text-center mt-12 pb-12"><a href="#contact" onclick="closeArchive('logos')" class="nav-link inline-block border border-white px-8 py-3 text-white font-mono text-xs hover:bg-white hover:text-black transition-colors">NEED A NEW LOGO?</a></div>
+            </div>
+        </div>
+
+        <!-- ARCHIVE: PRINT -->
+        <div id="modal-print" class="project-modal bg-black" data-lenis-prevent="true">
+            <div class="sticky top-0 z-50 flex justify-between items-center p-6 bg-black/90 backdrop-blur-md border-b border-brand-print/20">
+                <span class="text-brand-print font-mono text-xl font-bold">ARCHIVE: PRINT</span>
+                <button onclick="closeArchive('print'); audioEngine.play('click')" class="text-white hover:text-brand-print font-mono uppercase">[ CLOSE ]</button>
+            </div>
+            <div class="w-full max-w-[95vw] mx-auto p-6 md:p-12">
+                <div class="mb-12 border-b border-white/10 pb-8 max-w-5xl mx-auto"><h2 class="text-4xl font-serif text-white">Tangible Design.</h2><p class="text-neutral-400 mt-2">Business cards, packaging, and editorial layouts.</p></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+                    <div class="img-container"><img src="assets/images/adfant-badge-1.jpeg"></div>
+                    <div class="img-container"><img src="assets/images/spolight-anzia.jpeg"></div>
+                    <div class="img-container"><img src="assets/images/adfant-carte-de-visite.jpeg"></div>
+                    <div class="img-container"><img src="assets/images/anzia-bag-mockup-2.jpeg"></div>
+                    <div class="img-container"><img src="assets/images/anzia-square-boxes-mockup-1.jpeg"></div>
+                    <div class="img-container"><img src="assets/images/ad banner Adfant.png"></div>
+                </div>
+                <div class="text-center mt-12 pb-12"><a href="#contact" onclick="closeArchive('print')" class="nav-link inline-block border border-white px-8 py-3 text-white font-mono text-xs hover:bg-white hover:text-black transition-colors">START A PRINT PROJECT</a></div>
+            </div>
+        </div>
+
+        <!-- CONTACT (TERMINAL STYLE) -->
+        <section id="contact" class="py-32 relative overflow-hidden bg-[#020202]">
+            <div class="max-w-5xl mx-auto px-6 relative z-10">
+                <div class="glass-panel rounded-xl p-8 md:p-16 border border-white/5 shadow-2xl shadow-brand-zona/5 contact-reveal opacity-0 translate-y-10">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                        <div>
+                            <span class="text-brand-zona font-mono text-[10px] uppercase tracking-widest mb-4 block hacker-text" data-value="Get in touch">Get in touch</span>
+                            <h2 class="text-4xl md:text-5xl font-serif text-white mb-6">Let's create something <span class="italic text-neutral-500">legendary</span>.</h2>
+                            <p class="text-neutral-400 font-light leading-relaxed mb-10 text-sm">
+                                Based in Douala. Working with ambitious brands worldwide.
+                            </p>
+                            <div class="space-y-8 font-mono text-xs">
+                                <div class="flex items-center gap-4 group cursor-pointer magnetic-btn"><span class="text-brand-zona">/Phone</span><a href="tel:+237654491984" class="text-white hover:text-brand-zona transition-colors group-hover:translate-x-2 transition-transform block">(+237) 654 49 19 84</a></div>
+                                <div class="flex items-center gap-4 group cursor-pointer magnetic-btn"><span class="text-brand-zona">/Email</span><a href="mailto:joeyforosdesign@gmail.com" class="text-white hover:text-brand-zona transition-colors group-hover:translate-x-2 transition-transform block">joeyforosdesign@gmail.com</a></div>
+                                <div class="flex items-center gap-4 magnetic-btn"><span class="text-brand-zona">/Loc</span><span class="text-white">Douala, Cameroon</span></div>
+                            </div>
+                            <div class="flex gap-4 mt-12">
+                                <a href="https://www.facebook.com/feather237" target="_blank" class="w-10 h-10 border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-all magnetic-btn" onmouseenter="audioEngine.play('hover')"><span class="iconify" data-icon="lucide:facebook"></span></a>
+                                <a href="https://www.instagram.com/joey_foros" target="_blank" class="w-10 h-10 border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-all magnetic-btn" onmouseenter="audioEngine.play('hover')"><span class="iconify" data-icon="lucide:instagram"></span></a>
+                                <a href="https://www.linkedin.com/in/joey-foros-5510a4318" target="_blank" class="w-10 h-10 border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-all magnetic-btn" onmouseenter="audioEngine.play('hover')"><span class="iconify" data-icon="lucide:linkedin"></span></a>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <div class="item-wrapper">
-                            <div class="item-img">
-                                <img src="assets/images/poster-vyne-3.jpg" alt="Mobirise Website Builder" title="" data-slide-to="3" data-bs-slide-to="3" class="smallImage">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-lg-6">
-                <div class="item-wrapper">
-                    <div class="item-img ">
-                        <img class="w-100 largeImage" src="assets/images/poster-vyne-4.jpg" alt="Mobirise Website Builder" data-slide-to="3" data-bs-slide-to="3">
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="article11 cid-uZEQI0STdS" id="article11-e">
-    
-
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="title col-md-12 col-lg-10">
-                
-                <h4 class="mbr-section-subtitle align-center mbr-fonts-style mt-4 display-7"><strong>Design Details:<br></strong><div><br></div><br><div>1- The logo was built with sharp angles to express precision and discipline.</div><div>2- The dark palette was enriched with subtle gradients to add texture and depth.
-</div><div>3- Promotional visuals used shadows and focused light to suggest power and momentum.
-</div><div>4- Repetition and symmetry in layout reinforced the idea of control and structure.
-</div><div><br></div><br><div><br></div><div>An impactful, performance-driven identity that translates the brand’s energy into every piece of visual communication.</div><div>
-</div><div>
-</div><div>
-</div><div>
-</div><div>
-</div></h4>
-                
-            </div>
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="features031 cid-uZEQK1LTUQ" id="features031-f">
-    
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12 content-head mb-5">
-                <h1 class="mbr-section-title mbr-fonts-style mb-0 display-2">
-                    <strong>PROJECT 3: SOLARE</strong></h1>
-                
-            </div>
-        </div>
-        <div class="row justify-content-center  blockContent">
-            <div class="col-12 col-lg">
-                <div class="item-wrapper align-left">
-                    <div class="counter-container mbr-text mbr-fonts-style display-7">
-                        <ul>
-                            <li><strong>Industry: </strong>Coffee &amp; Relaxation Space</li><li><strong>Objective: </strong>Attract coffee lovers who appreciate calm atmospheres and artistic visuals, by creating a warm and inviting brand identity.</li><li><strong>Creation: </strong>Logo design and full visual identity, including packaging concepts.</li>
-                        </ul>
+                        <form action="https://formspree.io/f/mdknkbqv" method="POST" class="space-y-6 pt-2">
+                            <div class="group relative"><label class="text-[9px] font-mono text-brand-zona uppercase tracking-widest mb-1 block">01. Identity</label><input type="text" name="name" placeholder="John Doe" required class="w-full bg-white/5 border-b border-white/10 px-4 py-4 text-white placeholder-neutral-700 focus:outline-none focus:border-brand-zona focus:bg-white/10 transition-all font-mono text-sm rounded-sm" onfocus="audioEngine.play('hover')"></div>
+                            <div class="group relative"><label class="text-[9px] font-mono text-brand-zona uppercase tracking-widest mb-1 block">02. Communication</label><input type="email" name="email" placeholder="john@company.com" required class="w-full bg-white/5 border-b border-white/10 px-4 py-4 text-white placeholder-neutral-700 focus:outline-none focus:border-brand-zona focus:bg-white/10 transition-all font-mono text-sm rounded-sm" onfocus="audioEngine.play('hover')"></div>
+                            <div class="group relative"><label class="text-[9px] font-mono text-brand-zona uppercase tracking-widest mb-1 block">03. Brief</label><textarea name="message" rows="4" placeholder="Project details, budget..." required class="w-full bg-white/5 border-b border-white/10 px-4 py-4 text-white placeholder-neutral-700 focus:outline-none focus:border-brand-zona focus:bg-white/10 transition-all font-mono text-sm resize-none rounded-sm" onfocus="audioEngine.play('hover')"></textarea></div>
+                            <button type="submit" class="w-full bg-white text-black py-4 font-mono uppercase text-xs tracking-widest hover:bg-brand-zona transition-colors flex items-center justify-center gap-2 group magnetic-btn" onmouseenter="audioEngine.play('hover')" onclick="audioEngine.play('click')">Send Transmission <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right"></span></button>
+                        </form>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-6">
-                <div class="image-wrapper">
-                    <img class="w-100" src="assets/images/solare.jpg" alt="Mobirise Website Builder">
-                </div>
-            </div>
+        </section>
+    </main>
+    
+    <div id="lightbox" class="fixed inset-0 z-[9999] bg-black/95 hidden flex items-center justify-center cursor-zoom-out p-4 md:p-12"><img id="lightbox-img" src="" class="max-w-full max-h-full object-contain rounded-sm shadow-2xl"></div>
 
-        </div>
-    </div>
-</section>
+    <!-- Scripts -->
+    <script>
+        let isMuted = true;
+        function toggleAudio() { isMuted = !isMuted; const btn = document.getElementById('sound-toggle'); if(!isMuted) { audioEngine.init(); btn.innerHTML = "[ SOUND: ON ]"; btn.classList.add('active'); } else { btn.innerHTML = "[ SOUND: OFF ]"; btn.classList.remove('active'); } }
+        const audioEngine = { ctx: null, gainNode: null, init: function() { if(!this.ctx) { this.ctx = new (window.AudioContext || window.webkitAudioContext)(); this.gainNode = this.ctx.createGain(); this.gainNode.connect(this.ctx.destination); this.gainNode.gain.value = 0.05; } if(this.ctx.state === 'suspended') this.ctx.resume(); }, play: function(type) { if(isMuted || !this.ctx) return; const t = this.ctx.currentTime; const osc = this.ctx.createOscillator(); const gain = this.ctx.createGain(); osc.connect(gain); gain.connect(this.gainNode); if (type === 'hover') { osc.type = 'sine'; osc.frequency.setValueAtTime(400, t); osc.frequency.exponentialRampToValueAtTime(600, t+0.1); gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(0.5, t+0.05); gain.gain.exponentialRampToValueAtTime(0.001, t+0.2); osc.start(t); osc.stop(t+0.2); } else if (type === 'click') { osc.type = 'triangle'; osc.frequency.setValueAtTime(200, t); osc.frequency.exponentialRampToValueAtTime(50, t+0.3); gain.gain.setValueAtTime(0.8, t); gain.gain.exponentialRampToValueAtTime(0.001, t+0.3); osc.start(t); osc.stop(t+0.3); } } };
 
-<section data-bs-version="5.1" class="gallery3 cid-uZER3U6FQt" id="gallery03-g">
-    
-    
-    <div class="container-fluid">
-      <div class="row justify-content-center">
-        <div class="col-12 content-head">
-          <div class="mbr-section-head mb-5">
-            <h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-4">Solare’s creation process revolved around warmth, comfort, and the sensory experience of good coffee. I explored color combinations that evoke calmness and optimism blue for serenity and yellow for sunlight. The logo design took inspiration from minimalist illustrations, with soft lines to create a feeling of friendliness.</h4>
-            
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/carte-de-visite-solare.jpg" alt="Mobirise Website Builder" title="" data-slide-to="0" data-bs-slide-to="0">
-            </div>
-            
-          </div>
-        </div>
-        <div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/solare-packaging-1.png" alt="Mobirise Website Builder" title="" data-slide-to="1" data-bs-slide-to="1">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/solare-panneau.jpg" alt="Mobirise Website Builder" title="" data-slide-to="2" data-bs-slide-to="2">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/solare-post-2.png" alt="Mobirise Website Builder" title="" data-slide-to="3" data-bs-slide-to="3">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/solare-post-1.png" alt="Mobirise Website Builder" title="" data-slide-to="4" data-bs-slide-to="4">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/solare-post-3.png" alt="Mobirise Website Builder" title="" data-slide-to="5" data-bs-slide-to="5">
-            </div>
-            
-          </div>
-        </div>
-        
-        
-      </div>
-    </div>
-  </section>
+        window.addEventListener('load', () => {
+            gsap.registerPlugin(ScrollTrigger, Flip);
+            const tlLoader = gsap.timeline(); let countObj = { val: 0 };
+            tlLoader.to(countObj, { val: 100, duration: 1.5, ease: "power2.inOut", onUpdate: () => { const el = document.getElementById("preloader-count"); if(el) el.textContent = Math.floor(countObj.val) + "%"; } }).to("#preloader-bar", { width: "100%", duration: 1.5, ease: "power2.inOut" }, "<").to("#preloader", { y: "-100%", duration: 0.8, ease: "expo.inOut", delay: 0.2 }).add(() => initHeroAnimations(), "-=0.5");
+        });
 
-<section data-bs-version="5.1" class="article11 cid-uZFkQcNcsS" id="article11-y">
-    
+        const lenis = new Lenis({ duration: 1.5, smooth: true });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
 
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="title col-md-12 col-lg-10">
-                
-                <h4 class="mbr-section-subtitle align-center mbr-fonts-style mt-4 display-7"><strong>Design Details:<br></strong><div><br></div><br><div>1- Blue and yellow were balanced in proportions to avoid visual fatigue and create harmony.</div><div>2- Rounded typography conveys approachability and softness.</div><div>3- Small illustrations elements were subtly added to reinforce the brand theme.</div><div>4- The packaging was designed to feel collectible visually pleasing.</div><div>
-</div><div>
-</div><div>
-</div><div>
-</div><div>
-</div></h4>
-                
-            </div>
-        </div>
-    </div>
-</section>
+        document.querySelectorAll('.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId && targetId !== '#') {
+                    lenis.scrollTo(targetId, { offset: -50, duration: 1.5 });
+                    document.querySelectorAll('.project-modal.active').forEach(m => m.classList.remove('active'));
+                    lenis.start();
+                }
+            });
+        });
 
-<section data-bs-version="5.1" class="gallery3 cid-uZERFLhWxV" id="gallery03-h">
-    
-    
-    <div class="container-fluid">
-      <div class="row justify-content-center">
-        <div class="col-12 content-head">
-          <div class="mbr-section-head mb-5">
-            <h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-7"><div></div></h4>
-            
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="item features-image col-12 col-md-6 col-lg-6">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/solare-post-4.png" alt="Mobirise Website Builder" title="" data-slide-to="0" data-bs-slide-to="0">
-            </div>
-            
-          </div>
-        </div>
-        <div class="item features-image col-12 col-md-6 col-lg-6">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/solare-post-5.png" alt="Mobirise Website Builder" title="" data-slide-to="1" data-bs-slide-to="1">
-            </div>
-            
-          </div>
-        </div>
-        
-        
-      </div>
-    </div>
-  </section>
+        function initHeroAnimations() { const title = new SplitType('#main-title', { types: 'chars' }); gsap.from(title.chars, { y: 100, opacity: 0, rotateX: -90, stagger: 0.02, duration: 1, ease: "back.out(1.7)", delay: 0.2 }); gsap.to(".gsap-fade-in", { y: 0, opacity: 1, stagger: 0.1, duration: 1, ease: "power2.out", delay: 0.5 }); gsap.to(".reveal", { opacity: 1, y: 0, duration: 1, ease: "power2.out", scrollTrigger: { trigger: ".reveal", start: "top 80%" } }); }
 
-<section data-bs-version="5.1" class="article11 cid-uZESfb0hj5" id="article11-i">
-    
+        function toggleService(element) {
+            audioEngine.play('click');
+            const content = element.querySelector('.service-content');
+            const isActive = element.classList.contains('active');
+            document.querySelectorAll('.service-item').forEach(item => { item.classList.remove('active'); gsap.to(item.querySelector('.service-content'), { height: 0, opacity: 0, duration: 0.3 }); });
+            if (!isActive) { element.classList.add('active'); gsap.to(content, { height: "auto", opacity: 1, duration: 0.5, ease: "power2.out" }); }
+        }
 
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="title col-md-12 col-lg-10">
-                
-                <h4 class="mbr-section-subtitle align-center mbr-fonts-style mt-4 display-7">A charming and peaceful identity that captures the essence of relaxation and creativity perfectly aligned with Solare’s atmosphere.</h4>
-                
-            </div>
-        </div>
-    </div>
-</section>
+        const initialCardStates = { zona: { rotate: 0, x: 0, y: -20 }, vyne: { rotate: -6, x: -80, y: 10 }, solare: { rotate: 6, x: 80, y: 10 } };
+        function magicOpen(id) { audioEngine.play('click'); const card = document.getElementById(`card-${id}`); const modal = document.getElementById(`modal-${id}`); gsap.timeline().to(card, { y: -150, z: 100, rotate: 0, x: 0, scale: 1.1, duration: 0.5, ease: "back.out(1.2)" }).to(card, { filter: "brightness(3)", duration: 0.1, onComplete: () => { openModal(modal); gsap.set(card, { opacity: 0 }); } }); }
+        function openModal(modal) { if(!modal) return; modal.classList.add('active'); lenis.stop(); gsap.from(modal.querySelectorAll('.img-container, h2'), { y: 50, opacity: 0, stagger: 0.05, duration: 0.8, ease: "power2.out", delay: 0.3 }); }
+        function closeProject(id) { const modal = document.getElementById(`modal-${id}`); const card = document.getElementById(`card-${id}`); const state = initialCardStates[id]; modal.classList.remove('active'); lenis.start(); gsap.set(card, { opacity: 1, filter: "none" }); gsap.to(card, { x: state.x, y: state.y, rotate: state.rotate, scale: 1, z: 0, duration: 0.6, ease: "power3.out", delay: 0.2 }); }
+        function openArchive(id) { const modal = document.getElementById(`modal-${id}`); if(!modal) return; modal.classList.add('active'); lenis.stop(); gsap.from(modal.querySelectorAll('.img-container, h2'), { y: 50, opacity: 0, stagger: 0.05, duration: 0.8, ease: "power2.out", delay: 0.3 }); }
+        function closeArchive(id) { const modal = document.getElementById(`modal-${id}`); modal.classList.remove('active'); lenis.start(); }
 
-<section data-bs-version="5.1" class="article11 cid-uZESimNJuW" id="article11-j">
-    
+        const cursor = document.getElementById('cursor'); const cursorDot = document.getElementById('cursor-dot');
+        const xTo = gsap.quickSetter(cursor, "left", "px"); const yTo = gsap.quickSetter(cursor, "top", "px");
+        const xDot = gsap.quickSetter(cursorDot, "left", "px"); const yDot = gsap.quickSetter(cursorDot, "top", "px");
+        let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+        window.addEventListener("mousemove", e => { mouseX = e.clientX; mouseY = e.clientY; xDot(mouseX); yDot(mouseY); });
+        gsap.ticker.add(() => { const dt = 1.0 - Math.pow(1.0 - 0.15, gsap.ticker.deltaRatio()); cursorX += (mouseX - cursorX) * dt; cursorY += (mouseY - cursorY) * dt; xTo(cursorX); yTo(cursorY); });
+        document.querySelectorAll('a, button, .holo-card, .img-container, input, textarea, .magnetic-btn, .service-item').forEach(el => { el.addEventListener('mouseenter', () => { audioEngine.play('hover'); gsap.to(cursor, { width: 60, height: 60, backgroundColor: '#fff', mixBlendMode: 'difference', borderColor: 'transparent', duration: 0.3 }); gsap.to(cursorDot, { opacity: 0 }); }); el.addEventListener('mouseleave', () => { gsap.to(cursor, { width: 20, height: 20, backgroundColor: 'transparent', mixBlendMode: 'exclusion', borderColor: '#ccff00', duration: 0.3 }); gsap.to(cursorDot, { opacity: 1 }); }); });
 
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="title col-md-12 col-lg-10">
-                <h3 class="mbr-section-title mbr-fonts-style align-center mt-0 mb-0 display-2">
-                <strong>Others Projects</strong></h3>
-                <h4 class="mbr-section-subtitle align-center mbr-fonts-style mt-4 display-7">This section highlights my diverse graphic design projects, from eye-catching posters and social media visuals to distinctive logos and high-quality print designs. Each work is crafted with precision, creativity, and a strong sense of visual storytelling.</h4>
-                
-            </div>
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="article11 cid-uZESxFNk1f" id="article11-k">
-    
-
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="title col-md-12 col-lg-10">
-                <h3 class="mbr-section-title mbr-fonts-style align-center mt-0 mb-0 display-2">
-                <strong>1- Posters Design</strong></h3>
-                
-                
-            </div>
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="gallery3 cid-uZESEFEDQB" id="gallery03-l">
-    
-    
-    <div class="container-fluid">
-      <div class="row justify-content-center">
-        <div class="col-12 content-head">
-          <div class="mbr-section-head mb-5">
-            <h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-4">I create visually compelling posters that capture attention and communicate messages effectively. Each poster balances typography, color, and imagery to deliver a strong impact and reflect the intended mood or theme.</h4>
-            
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/poster-4.jpg" alt="Mobirise Website Builder" title="" data-slide-to="0" data-bs-slide-to="0">
-            </div>
-            
-          </div>
-        </div>
-        <div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/poster-5.jpeg" alt="Mobirise Website Builder" title="" data-slide-to="1" data-bs-slide-to="1">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/poster-7.jpeg" alt="Mobirise Website Builder" title="" data-slide-to="2" data-bs-slide-to="2">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/poster-10.jpg" alt="Mobirise Website Builder" title="" data-slide-to="3" data-bs-slide-to="3">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/poster-11.jpeg" alt="Mobirise Website Builder" title="" data-slide-to="4" data-bs-slide-to="4">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/poster-13.jpg" alt="Mobirise Website Builder" title="" data-slide-to="5" data-bs-slide-to="5">
-            </div>
-            
-          </div>
-        </div>
-        
-        
-      </div>
-    </div>
-  </section>
-
-<section data-bs-version="5.1" class="article11 cid-uZETsIWwKn" id="article11-m">
-    
-
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="title col-md-12 col-lg-10">
-                <h3 class="mbr-section-title mbr-fonts-style align-center mt-0 mb-0 display-2">
-                <strong>2- Social Media Design</strong></h3>
-                
-                
-            </div>
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="gallery3 cid-uZETxSN9g7" id="gallery03-n">
-    
-    
-    <div class="container-fluid">
-      <div class="row justify-content-center">
-        <div class="col-12 content-head">
-          <div class="mbr-section-head mb-5">
-            <h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-4">I design engaging social media visuals optimized for each platform, combining creativity and strategic communication. Each design enhances brand identity and audience interaction.</h4>
-            
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/nike-glace.jpeg" alt="Mobirise Website Builder" title="" data-slide-to="0" data-bs-slide-to="0">
-            </div>
-            
-          </div>
-        </div>
-        <div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/lays-poster-2.jpeg" alt="Mobirise Website Builder" title="" data-slide-to="1" data-bs-slide-to="1">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/pepsi-affiche-2.jpeg" alt="Mobirise Website Builder" title="" data-slide-to="2" data-bs-slide-to="2">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/flyer-st-valentin-3.png" alt="Mobirise Website Builder" title="" data-slide-to="3" data-bs-slide-to="3">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/portfolio-4.jpg" alt="Mobirise Website Builder" title="" data-slide-to="4" data-bs-slide-to="4">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/img-20250228-wa0005.jpg" alt="Mobirise Website Builder" title="" data-slide-to="5" data-bs-slide-to="5">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/post-1.jpg" alt="Mobirise Website Builder" title="" data-slide-to="6" data-bs-slide-to="6">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/3-20250326-223647.png" alt="Mobirise Website Builder" title="" data-slide-to="7" data-bs-slide-to="7">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/fb-img-17284147504344314.jpg" alt="Mobirise Website Builder" title="" data-slide-to="8" data-bs-slide-to="8">
-            </div>
-            
-          </div>
-        </div>
-        
-        
-      </div>
-    </div>
-  </section>
-
-<section data-bs-version="5.1" class="article11 cid-uZEUmCC0Ox" id="article11-o">
-    
-
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="title col-md-12 col-lg-10">
-                <h3 class="mbr-section-title mbr-fonts-style align-center mt-0 mb-0 display-2">
-                <strong>4- Logos Design</strong></h3>
-                
-                
-            </div>
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="gallery3 cid-uZEUpZFSbT" id="gallery03-p">
-    
-    
-    <div class="container-fluid">
-      <div class="row justify-content-center">
-        <div class="col-12 content-head">
-          <div class="mbr-section-head mb-5">
-            <h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-4">I craft distinctive logos that define brand identity and leave a lasting impression. Every logo is carefully developed to convey personality, values, and versatility across digital and print applications.</h4>
-            
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/logo-principal-brune-prod.jpg" alt="Mobirise Website Builder" title="" data-slide-to="0" data-bs-slide-to="0">
-            </div>
-            
-          </div>
-        </div>
-        <div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/toasty.jpg" alt="Mobirise Website Builder" title="" data-slide-to="1" data-bs-slide-to="1">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/open-ghost.png" alt="Mobirise Website Builder" title="" data-slide-to="2" data-bs-slide-to="2">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/logan.png" alt="Mobirise Website Builder" title="" data-slide-to="3" data-bs-slide-to="3">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/waldo.png" alt="Mobirise Website Builder" title="" data-slide-to="4" data-bs-slide-to="4">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/gena.png" alt="Mobirise Website Builder" title="" data-slide-to="5" data-bs-slide-to="5">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/alligo.png" alt="Mobirise Website Builder" title="" data-slide-to="6" data-bs-slide-to="6">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/omero.png" alt="Mobirise Website Builder" title="" data-slide-to="7" data-bs-slide-to="7">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/corse.png" alt="Mobirise Website Builder" title="" data-slide-to="8" data-bs-slide-to="8">
-            </div>
-            
-          </div>
-        </div>
-        
-        
-      </div>
-    </div>
-  </section>
-
-<section data-bs-version="5.1" class="article11 cid-uZEWzPCsbx" id="article11-q">
-    
-
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="title col-md-12 col-lg-10">
-                <h3 class="mbr-section-title mbr-fonts-style align-center mt-0 mb-0 display-2">
-                <strong>4- Prints Design</strong></h3>
-                
-                
-            </div>
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="gallery3 cid-uZEWDqJxoZ" id="gallery03-r">
-    
-    
-    <div class="container-fluid">
-      <div class="row justify-content-center">
-        <div class="col-12 content-head">
-          <div class="mbr-section-head mb-5">
-            <h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-4">I produce high-quality print materials brochures, flyers, business cards, and packaging with attention to detail, color accuracy, and composition. Each design ensures a professional and memorable physical presence.</h4>
-            
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/generated-image-october-12-2025-12-10am.png" alt="Mobirise Website Builder" title="" data-slide-to="0" data-bs-slide-to="0">
-            </div>
-            
-          </div>
-        </div>
-        <div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/adfant-badge-1.jpeg" alt="Mobirise Website Builder" title="" data-slide-to="1" data-bs-slide-to="1">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/adfant-carte-de-visite.jpeg" alt="Mobirise Website Builder" title="" data-slide-to="2" data-bs-slide-to="2">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/spolight-anzia.jpeg" alt="Mobirise Website Builder" title="" data-slide-to="3" data-bs-slide-to="3">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/anzia-bag-mockup-2.jpeg" alt="Mobirise Website Builder" title="" data-slide-to="4" data-bs-slide-to="4">
-            </div>
-            
-          </div>
-        </div><div class="item features-image col-12 col-md-6 col-lg-4">
-          <div class="item-wrapper">
-            <div class="item-img">
-              <img src="assets/images/anzia-square-boxes-mockup-1.jpeg" alt="Mobirise Website Builder" title="" data-slide-to="5" data-bs-slide-to="5">
-            </div>
-            
-          </div>
-        </div>
-        
-        
-      </div>
-    </div>
-  </section>
-
-<section data-bs-version="5.1" class="header09 cid-uZEXRX3OgX" id="header09-s">
-    
-    
-    
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-md-8">
-                <h1 class="mbr-section-title mbr-fonts-style mb-4 display-1">
-                    <strong>Let's Create Something Amazing</strong></h1>
-                <p class="mbr-fonts-style mbr-text mb-4 display-7">Transform your brand with exceptional design.</p>
-                <div class="mbr-section-btn"><a class="btn btn-white-outline display-7" href="index.html#article11-3">View My Work</a> 
-                    <a class="btn btn-white display-7" href="index.html#form02-v">Let's work together</a></div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="social05 cid-uZEXTfqoVj" id="social05-t">
-    
-
-    
-
-    <div class="container">
-        <div class="row">
-            <h3 class="mbr-section-title align-center mb-5 mbr-fonts-style display-2">
-                <strong>Connect With Me</strong></h3>
-            <div class="col-12">
-                <div class="social-row">
-                    <div class="soc-item">
-                        <a href="https://www.facebook.com/feather237" target="_blank">
-                            <span class="mbr-iconfont socicon-facebook socicon"></span>
-                        </a>
-                    </div>
-                    <div class="soc-item">
-                        <a href="https://wa.me/237654491984">
-                            <span class="mbr-iconfont socicon-whatsapp socicon"></span>
-                        </a>
-                    </div>
-                    <div class="soc-item">
-                        <a href="https://www.instagram.com/joey_foros?igsh=MWdkemc3MjBmNXA0aQ==" target="_blank">
-                            <span class="mbr-iconfont socicon-instagram socicon"></span>
-                        </a>
-                    </div>
-                    
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="contacts01 cid-uZEY01AVHG" id="contacts01-u">
-    
-
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 content-head">
-                <div class="mbr-section-head mb-5">
-                    <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
-                        <strong>Contact me</strong></h3>
-                    
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            
-            <div class="item features-without-image col-12 col-md-6 active">
-                <div class="item-wrapper">
-                    <div class="text-wrapper">
-                        <h6 class="card-title mbr-fonts-style mb-3 display-5">
-                            <strong>Phone</strong>
-                        </h6>
-                        <p class="mbr-text mbr-fonts-style display-7">(+237) 654 491 984</p>
-                    </div>
-                </div>
-            </div><div class="item features-without-image col-12 col-md-6">
-                <div class="item-wrapper">
-                    <div class="text-wrapper">
-                        <h6 class="card-title mbr-fonts-style mb-3 display-5">
-                            <strong>Email</strong>
-                        </h6>
-                        <p class="mbr-text mbr-fonts-style display-7">joeyforosdesign@gmail.com</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item features-without-image col-12 col-md-6">
-                <div class="item-wrapper">
-                    <div class="text-wrapper">
-                        <h6 class="card-title mbr-fonts-style mb-3 display-5">
-                            <strong>Address</strong>
-                        </h6>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                            Douala, Cameroon</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item features-without-image col-12 col-md-6">
-                <div class="item-wrapper">
-                    <div class="text-wrapper">
-                        <h6 class="card-title mbr-fonts-style mb-3 display-5"><strong>Social media</strong></h6>
-                        <p class="mbr-text mbr-fonts-style display-7">@joey_foros</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="form5 cid-uZEY2F3WzT" id="form02-v">
-    
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 content-head">
-                <div class="mbr-section-head mb-5">
-                    <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
-                        <strong>Get In Touch</strong>
-                    </h3>
-                    
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
-                <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true" value="AuqdsoXtEP5EtMkKjbuYG0RqRhX83EmXwFCHS7y1SxQugbaAdu6YipzGfRmkh3e7scbmbXxZESYbrTdasgYs2ykX/6wD7hli5N/C3yvYYrBBbUh0qbZsI6NDU6w4dmoa">
-                    <div class="row">
-                        <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out the form!</div>
-                        <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
-                            Oops...! some problem!
-                        </div>
-                    </div>
-                    <div class="dragArea row">
-                        <div class="col-md col-sm-12 form-group mb-3" data-for="name">
-                            <input type="text" name="name" placeholder="Name" data-form-field="name" class="form-control" value="" id="name-form02-v">
-                        </div>
-                        <div class="col-md col-sm-12 form-group mb-3" data-for="email">
-                            <input type="email" name="email" placeholder="Email" data-form-field="email" class="form-control" value="" id="email-form02-v">
-                        </div>
-                        <div class="col-12 form-group mb-3 mb-3" data-for="url">
-                            <input type="url" name="url" placeholder="Phone" data-form-field="url" class="form-control" value="" id="url-form02-v">
-                        </div>
-                        <div class="col-12 form-group mb-3" data-for="textarea">
-                            <textarea name="textarea" placeholder="Your Project (brief, budget, deadline...)" data-form-field="textarea" class="form-control" id="textarea-form02-v"></textarea>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn"><button type="submit" class="btn btn-white-outline display-7">Let's Talk About Your Project</button></div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="footer3 cid-uZEY4g2cvi" once="footers" id="footer03-w">
-
-        
-
-    
-
-    <div class="container">
-        <div class="row">
-            <div class="row-links">
-                <ul class="header-menu">
-                  
-                  
-                  
-                  
-                <li class="header-menu-item mbr-fonts-style display-5">
-                    <a href="index.html#top" class="text-white text-primary">Home</a>
-                  </li><li class="header-menu-item mbr-fonts-style display-5">
-                    <a href="index.html#article11-3" class="text-white text-primary">Projects</a></li><li class="header-menu-item mbr-fonts-style display-5"><a href="index.html#article11-i" class="text-white text-primary">Others</a></li><li class="header-menu-item mbr-fonts-style display-5">
-                    <a href="index.html#contacts01-u" class="text-white text-primary">Contact</a>
-                  </li></ul>
-              </div>
-
-            <div class="col-12 mt-4">
-                <div class="social-row">
-                    <div class="soc-item">
-                        <a href="https://www.facebook.com/feather237" target="_blank">
-                            <span class="mbr-iconfont display-7 socicon-facebook socicon"></span>
-                        </a>
-                    </div>
-                    <div class="soc-item">
-                        <a href="https://www.linkedin.com/in/joey-foros-5510a4318?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
-                            <span class="mbr-iconfont socicon-logmein socicon"></span>
-                        </a>
-                    </div>
-                    <div class="soc-item">
-                        <a href="https://www.instagram.com/joey_foros?igsh=MWdkemc3MjBmNXA0aQ==" target="_blank">
-                            <span class="mbr-iconfont socicon-instagram socicon"></span>
-                        </a>
-                    </div>
-                    
-                    
-                </div>
-            </div>
-            <div class="col-12 mt-5">
-                <p class="mbr-fonts-style copyright display-7">© 2025 Joey Foros. All rights reserved.</p>
-            </div>
-        </div>
-    </div>
-</section><script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/index.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/theme/js/script.js"></script>  <script src="assets/formoid/formoid.min.js"></script>  
-  
-  
- <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i class="mbr-arrow-up-icon mbr-arrow-up-icon-cm cm-icon cm-icon-smallarrow-up"></i></a></div>
-    <input name="animation" type="hidden">
-	<script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/insights/script.js"></script>
-  </body>
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; document.querySelectorAll(".hacker-text").forEach(item => { item.onmouseover = event => { let iteration = 0; clearInterval(item.interval); item.interval = setInterval(() => { event.target.innerText = event.target.innerText.split("").map((letter, index) => { if(index < iteration) return event.target.dataset.value[index]; return letters[Math.floor(Math.random() * 26)] }).join(""); if(iteration >= event.target.dataset.value.length) clearInterval(item.interval); iteration += 1 / 3; }, 30); } });
+        const lightbox = document.getElementById('lightbox'); const lightboxImg = document.getElementById('lightbox-img'); document.querySelectorAll('.img-container img, .logo-grid-item img').forEach(img => { img.addEventListener('click', (e) => { e.stopPropagation(); lightboxImg.src = img.src; lightbox.classList.remove('hidden'); lenis.stop(); }); }); lightbox.addEventListener('click', () => { lightbox.classList.add('hidden'); lenis.start(); });
+        const canvas = document.getElementById('canvas-bg'); const ctx = canvas.getContext('2d'); let width, height, particles = []; function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; } window.addEventListener('resize', resize); resize(); class Particle { constructor() { this.x = Math.random() * width; this.y = Math.random() * height; this.vx = (Math.random()-0.5)*0.5; this.vy = (Math.random()-0.5)*0.5; this.size = Math.random()*2; } update() { this.x += this.vx; this.y += this.vy; if(this.x<0||this.x>width)this.vx*=-1; if(this.y<0||this.y>height)this.vy*=-1; let dx = mouseX - this.x; let dy = mouseY - this.y; if(Math.sqrt(dx*dx+dy*dy) < 150) { this.x -= dx*0.01; this.y -= dy*0.01; } } draw() { ctx.fillStyle = 'rgba(255,255,255,0.3)'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill(); } } for(let i=0; i<60; i++) particles.push(new Particle()); function animateCanvas() { ctx.clearRect(0,0,width,height); particles.forEach((p, index) => { p.update(); p.draw(); for(let j=index; j<particles.length; j++) { let dx = p.x - particles[j].x; let dy = p.y - particles[j].y; let dist = Math.sqrt(dx*dx + dy*dy); if(dist < 100) { ctx.strokeStyle = `rgba(255,255,255,${0.1 - dist/1000})`; ctx.lineWidth = 0.5; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke(); } } }); requestAnimationFrame(animateCanvas); } animateCanvas();
+        gsap.to(".contact-reveal", { scrollTrigger: { trigger: "#contact", start: "top 70%" }, y: 0, opacity: 1, duration: 1 });
+    </script>
+</body>
 </html>
