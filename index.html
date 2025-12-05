@@ -60,30 +60,34 @@
         .lenis.lenis-stopped { overflow: hidden; }
         body { background-color: #030303; cursor: none; overflow-x: hidden; color: #e5e5e5; }
 
-        /* --- MOBILE OPTIMIZATIONS (NEW) --- */
+        /* --- MOBILE OPTIMIZATIONS --- */
         @media (max-width: 768px) {
-            /* Disable custom cursor on mobile */
             #cursor, #cursor-dot { display: none !important; }
             body { cursor: auto !important; }
-            
-            /* Responsive Card Positions (CSS handles initial state instead of Inline Styles) */
-            #card-solare { transform: rotate(5deg) translate(15px, 5px); }
-            #card-vyne { transform: rotate(-5deg) translate(-15px, 5px); }
-            #card-zona { transform: rotate(0deg) translate(0px, -5px); }
+            .project-deck {
+                display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important;
+                overflow-x: auto !important; overflow-y: hidden !important; gap: 20px !important;
+                width: 100% !important; height: 480px !important; padding-left: 24px !important; padding-right: 24px !important;
+                perspective: none !important; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+            }
+            .project-deck::-webkit-scrollbar { display: none; }
+            .holo-card {
+                position: relative !important; top: auto !important; left: auto !important;
+                min-width: 85vw !important; max-width: 85vw !important; height: 100% !important;
+                transform: none !important; scroll-snap-align: center; margin: 0 !important;
+            }
+            #card-solare, #card-vyne, #card-zona { transform: none !important; }
         }
         
         @media (min-width: 769px) {
-            /* Desktop positions */
             #card-solare { transform: rotate(15deg) translate(80px, 10px); }
             #card-vyne { transform: rotate(-10deg) translate(-80px, 10px); }
             #card-zona { transform: rotate(0deg) translate(0px, -20px); }
         }
 
-        /* Menu Dropdown Animation */
         #nav-dropdown { transition: max-height 0.5s ease-in-out, opacity 0.3s ease; max-height: 0; overflow: hidden; opacity: 0; }
         #nav-dropdown.open { max-height: 300px; opacity: 1; margin-top: 1rem; }
 
-        /* FX */
         .noise-wrapper {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 90; opacity: 0.05;
@@ -97,12 +101,10 @@
             position: fixed; inset: 0; z-index: -2; pointer-events: none;
         }
 
-        /* HOLO CARDS */
         .project-deck { perspective: 2000px; transform-style: preserve-3d; }
         .holo-card {
             background: rgba(20, 20, 20, 0.95); border: 1px solid rgba(255,255,255,0.1);
             transform-style: preserve-3d; 
-            /* Added transition for opacity and filter */
             transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s, border-color 0.5s, filter 0.5s, opacity 0.5s;
             cursor: pointer; overflow: hidden; position: relative;
         }
@@ -112,13 +114,11 @@
             animation: shimmer 4s infinite linear; pointer-events: none; z-index: 20;
         }
         
-        /* ORIGINAL HOVER EFFECTS (Kept intact) */
         .card-zona:hover { box-shadow: 0 0 80px rgba(163, 230, 53, 0.5); border-color: #a3e635; z-index: 100 !important; }
         .card-vyne:hover { box-shadow: 0 0 80px rgba(168, 85, 247, 0.5); border-color: #a855f7; z-index: 100 !important; }
         .card-solare:hover { box-shadow: 0 0 80px rgba(250, 204, 21, 0.5); border-color: #facc15; z-index: 100 !important; }
         .card-print:hover { box-shadow: 0 0 80px rgba(56, 189, 248, 0.5); border-color: #38bdf8; z-index: 50; }
         
-        /* Dim others on hover (Desktop only to avoid sticky hover on mobile) */
         @media (hover: hover) {
             .project-deck:hover .holo-card:not(:hover) { filter: grayscale(100%) brightness(0.2); transform: scale(0.9) translateZ(-50px); opacity: 0.5; }
         }
@@ -131,7 +131,7 @@
         }
         .project-modal.active { transform: translateY(0); opacity: 1; }
 
-        /* IMAGES */
+        /* IMAGES & DETAILS STYLING */
         .img-container { 
             position: relative; width: 100%; height: auto;
             background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); 
@@ -139,10 +139,20 @@
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .img-container img { width: 100%; height: auto; display: block; object-fit: contain; transition: transform 0.7s ease; }
-        .img-container:hover { border-color: #a3e635; box-shadow: 0 0 30px rgba(163, 230, 53, 0.15); z-index: 10; }
+        .img-container:hover { border-color: rgba(255,255,255,0.2); z-index: 10; }
         .img-container:hover img { transform: scale(1.02); }
 
-        /* LOGO GRID ITEM */
+        .detail-card {
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+            padding: 24px; transition: all 0.3s ease;
+        }
+        .detail-card:hover {
+            background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.2); transform: translateY(-5px);
+        }
+        .detail-number {
+            font-family: 'Space Mono', monospace; font-size: 4rem; line-height: 1; opacity: 0.2; margin-bottom: 1rem; display: block;
+        }
+
         .logo-grid-item {
             background: rgba(255,255,255,0.03); display: flex; align-items: center; justify-content: center;
             border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s;
@@ -152,10 +162,10 @@
         .logo-grid-item img { width: 80%; height: 80%; object-fit: contain; filter: brightness(1); transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1); }
         .logo-grid-item:hover img { transform: scale(1.1); }
 
-        /* UTILS */
         .service-content { height: 0; overflow: hidden; opacity: 0; }
         .service-item.active .icon-plus { transform: rotate(45deg); color: #a3e635; }
         .service-item.active .service-title { color: #fff; }
+        
         #cursor { position: fixed; top: 0; left: 0; width: 20px; height: 20px; border: 1px solid rgba(255, 255, 255, 0.8); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); mix-blend-mode: difference; transition: width 0.3s, height 0.3s; }
         #cursor-dot { position: fixed; top: 0; left: 0; width: 4px; height: 4px; background: #ccff00; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
         .sound-widget { position: fixed; bottom: 30px; left: 30px; z-index: 9998; cursor: pointer; font-family: 'Space Mono', monospace; font-size: 10px; color: #666; border: 1px solid #333; padding: 8px 12px; border-radius: 99px; transition: all 0.3s; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); }
@@ -185,33 +195,21 @@
     <div id="cursor"></div>
     <div id="cursor-dot"></div>
 
-    <!-- NAV (UPDATED FOR MOBILE DROPDOWN) -->
+    <!-- NAV (MOBILE DROPDOWN) -->
     <nav class="fixed top-6 left-0 w-full z-50 flex justify-center px-4">
         <div id="nav-wrapper" class="bg-black/80 backdrop-blur-xl border border-white/10 rounded-2xl px-4 py-2 flex flex-col items-center w-auto max-w-2xl shadow-2xl transition-all duration-300">
-            
-            <!-- Top Bar -->
             <div class="flex items-center justify-between w-full gap-4">
                 <a href="#" class="cursor-pointer hover:scale-105 transition-transform bg-white/5 rounded-full p-2 w-10 h-10 flex items-center justify-center border border-white/10 magnetic-btn">
                     <img src="assets/images/logo-jf.png" alt="Logo" class="h-4 w-auto invert brightness-200">
                 </a>
-
-                <!-- Desktop Menu -->
                 <div class="hidden md:flex gap-1 px-4">
                     <a href="#about" class="nav-link text-[10px] font-mono text-neutral-400 hover:text-white hover:bg-white/5 px-4 py-2 rounded-full uppercase tracking-widest transition-all cursor-pointer magnetic-btn hacker-text" data-value="Studio">Studio</a>
                     <a href="#deck" class="nav-link text-[10px] font-mono text-neutral-400 hover:text-white hover:bg-white/5 px-4 py-2 rounded-full uppercase tracking-widest transition-all cursor-pointer magnetic-btn hacker-text" data-value="Work">Work</a>
                     <a href="#archives" class="nav-link text-[10px] font-mono text-neutral-400 hover:text-white hover:bg-white/5 px-4 py-2 rounded-full uppercase tracking-widest transition-all cursor-pointer magnetic-btn hacker-text" data-value="Archives">Archives</a>
                 </div>
-
-                <!-- Desktop CTA -->
                 <a href="#contact" class="hidden md:block nav-link bg-white text-black text-[10px] font-mono font-bold uppercase tracking-widest px-6 py-2.5 rounded-full hover:bg-brand-zona transition-colors cursor-pointer border border-white magnetic-btn">Start</a>
-
-                <!-- Mobile Menu Button -->
-                <button onclick="toggleMobileMenu()" id="menu-btn" class="md:hidden text-white font-mono text-[10px] uppercase border border-white/20 px-3 py-2 rounded-full hover:bg-white/10 transition-colors">
-                    [ MENU + ]
-                </button>
+                <button onclick="toggleMobileMenu()" id="menu-btn" class="md:hidden text-white font-mono text-[10px] uppercase border border-white/20 px-3 py-2 rounded-full hover:bg-white/10 transition-colors">[ MENU + ]</button>
             </div>
-
-            <!-- Mobile Dropdown Links -->
             <div id="nav-dropdown" class="flex flex-col gap-2 md:hidden w-full">
                 <div class="h-[1px] w-full bg-white/10 my-2"></div>
                 <a href="#about" onclick="toggleMobileMenu()" class="nav-link text-center text-xs font-mono text-neutral-300 hover:text-brand-zona hover:bg-white/5 py-3 rounded-lg uppercase tracking-widest transition-all">Studio</a>
@@ -236,7 +234,7 @@
                     <h1 id="main-title" class="text-[13vw] md:text-[11rem] leading-[0.9] font-serif tracking-tighter text-white mix-blend-overlay opacity-90 select-none cursor-default">Joey Foros</h1>
                 </div>
                 <p class="gsap-fade-in text-base md:text-xl text-neutral-400 font-light max-w-xl mx-auto mb-16 leading-relaxed opacity-0 translate-y-10">
-                    Strategic Brand Designer & Art Director. <br>I turn <span class="text-brand-zona font-serif italic">business goals</span> into visual dominance.
+                    Strategic Brand Designer & Art Director. <br>I help brands<span class="text-brand-zona font-serif italic">turn their business goals into impactful visual experiences,</span> creating identities and campaigns that stand out and resonate.
                 </p>
                 <div class="reveal delay-300 w-full max-w-4xl border-t border-b border-white/10 py-6 grid grid-cols-3 gap-4 mb-12">
                     <div class="text-center group"><span class="block text-2xl md:text-3xl font-serif text-white mb-1">7+</span><span class="text-[9px] font-mono uppercase text-neutral-500">Years Exp.</span></div>
@@ -271,8 +269,8 @@
                         <div><h2 class="text-3xl font-serif text-white mb-1">The Studio</h2><p class="text-[10px] font-mono text-brand-zona uppercase tracking-widest">Douala, Cameroon</p></div>
                     </div>
                     <div class="space-y-6 text-neutral-400 font-light leading-relaxed">
-                        <p>I am Joey Foros, a digital craftsman obsessed with the intersection of <span class="text-white">technology and emotion</span>. I engineer visual systems that solve business problems.</p>
-                        <p>My approach is rooted in strategy. Every pixel serves a purpose. I partner with ambitious brands to define their place in the future.</p>
+                        <p>I’m Joey Foros. I’m fascinated by the place where technology meets emotion, and I enjoy creating visual systems that help businesses communicate and solve real problems.</p>
+                        <p>I work closely with brands that want to grow and evolve, exploring ideas, experimenting with visuals, and finding solutions that actually make a difference. My goal is simple: to help companies express who they are and where they’re going.</p>
                     </div>
                     <div class="mt-8 pt-8 border-t border-white/10">
                         <a href="#contact" class="nav-link inline-flex items-center gap-2 text-white hover:text-brand-zona transition-colors font-mono text-xs uppercase tracking-widest group-hover:translate-x-2 transition-transform duration-300">Book a Consultation <span class="iconify" data-icon="lucide:arrow-right"></span></a>
@@ -283,44 +281,39 @@
                     <h2 class="text-xl font-mono text-white mb-8 border-l-2 border-brand-zona pl-4">Capabilities</h2>
                     <div class="service-item group border-b border-white/10" onclick="toggleService(this)">
                         <div class="py-6 hover:bg-white/5 px-4 transition-colors cursor-pointer flex justify-between items-center" onmouseenter="audioEngine.play('hover')"><h3 class="text-2xl font-serif text-neutral-400 service-title group-hover:translate-x-2 transition-all">Branding</h3><div class="flex items-center gap-4"><span class="text-[10px] font-mono text-brand-zona">01</span><span class="iconify icon-plus text-neutral-600 transition-transform duration-300" data-icon="lucide:plus"></span></div></div>
-                        <div class="service-content px-4"><div class="pb-6 text-neutral-400 font-light text-sm leading-relaxed space-y-4"><p>Comprehensive brand systems. Logo design, typography, color palettes.</p><a href="#contact" class="nav-link inline-block text-brand-zona border border-brand-zona/30 px-4 py-2 rounded-full font-mono text-[10px] hover:bg-brand-zona hover:text-black transition-colors">GET THIS SERVICE</a></div></div>
+                        <div class="service-content px-4"><div class="pb-6 text-neutral-400 font-light text-sm leading-relaxed space-y-4"><p>I design comprehensive brand systems, including logos, typography, and color palettes that help brands communicate clearly and stand out.</p><a href="#contact" class="nav-link inline-block text-brand-zona border border-brand-zona/30 px-4 py-2 rounded-full font-mono text-[10px] hover:bg-brand-zona hover:text-black transition-colors">GET THIS SERVICE</a></div></div>
                     </div>
                     <div class="service-item group border-b border-white/10" onclick="toggleService(this)">
                         <div class="py-6 hover:bg-white/5 px-4 transition-colors cursor-pointer flex justify-between items-center" onmouseenter="audioEngine.play('hover')"><h3 class="text-2xl font-serif text-neutral-400 service-title group-hover:translate-x-2 transition-all">Social Media Design</h3><div class="flex items-center gap-4"><span class="text-[10px] font-mono text-brand-zona">02</span><span class="iconify icon-plus text-neutral-600 transition-transform duration-300" data-icon="lucide:plus"></span></div></div>
-                        <div class="service-content px-4"><div class="pb-6 text-neutral-400 font-light text-sm leading-relaxed space-y-4"><p>High-conversion assets for Instagram, LinkedIn and Facebook.</p><a href="#contact" class="nav-link inline-block text-brand-zona border border-brand-zona/30 px-4 py-2 rounded-full font-mono text-[10px] hover:bg-brand-zona hover:text-black transition-colors">GET THIS SERVICE</a></div></div>
+                        <div class="service-content px-4"><div class="pb-6 text-neutral-400 font-light text-sm leading-relaxed space-y-4"><p>I create high-conversion assets for Instagram, LinkedIn, and Facebook, helping brands engage their audience and get measurable results.</p><a href="#contact" class="nav-link inline-block text-brand-zona border border-brand-zona/30 px-4 py-2 rounded-full font-mono text-[10px] hover:bg-brand-zona hover:text-black transition-colors">GET THIS SERVICE</a></div></div>
                     </div>
                     <div class="service-item group border-b border-white/10" onclick="toggleService(this)">
                         <div class="py-6 hover:bg-white/5 px-4 transition-colors cursor-pointer flex justify-between items-center" onmouseenter="audioEngine.play('hover')"><h3 class="text-2xl font-serif text-neutral-400 service-title group-hover:translate-x-2 transition-all">Poster Design</h3><div class="flex items-center gap-4"><span class="text-[10px] font-mono text-brand-zona">03</span><span class="iconify icon-plus text-neutral-600 transition-transform duration-300" data-icon="lucide:plus"></span></div></div>
-                        <div class="service-content px-4"><div class="pb-6 text-neutral-400 font-light text-sm leading-relaxed space-y-4"><p>Striking visuals for events, advertising, and artistic expression.</p><a href="#contact" class="nav-link inline-block text-brand-zona border border-brand-zona/30 px-4 py-2 rounded-full font-mono text-[10px] hover:bg-brand-zona hover:text-black transition-colors">GET THIS SERVICE</a></div></div>
+                        <div class="service-content px-4"><div class="pb-6 text-neutral-400 font-light text-sm leading-relaxed space-y-4"><p>I craft striking visuals for events, advertising, and artistic projects, bringing ideas to life and capturing attention.</p><a href="#contact" class="nav-link inline-block text-brand-zona border border-brand-zona/30 px-4 py-2 rounded-full font-mono text-[10px] hover:bg-brand-zona hover:text-black transition-colors">GET THIS SERVICE</a></div></div>
                     </div>
                     <div class="service-item group border-b border-white/10" onclick="toggleService(this)">
                         <div class="py-6 hover:bg-white/5 px-4 transition-colors cursor-pointer flex justify-between items-center" onmouseenter="audioEngine.play('hover')"><h3 class="text-2xl font-serif text-neutral-400 service-title group-hover:translate-x-2 transition-all">Art Direction</h3><div class="flex items-center gap-4"><span class="text-[10px] font-mono text-brand-zona">04</span><span class="iconify icon-plus text-neutral-600 transition-transform duration-300" data-icon="lucide:plus"></span></div></div>
-                        <div class="service-content px-4"><div class="pb-6 text-neutral-400 font-light text-sm leading-relaxed space-y-4"><p>Guiding the overall visual tone. From photoshoots to campaign rollouts.</p><a href="#contact" class="nav-link inline-block text-brand-zona border border-brand-zona/30 px-4 py-2 rounded-full font-mono text-[10px] hover:bg-brand-zona hover:text-black transition-colors">GET THIS SERVICE</a></div></div>
+                        <div class="service-content px-4"><div class="pb-6 text-neutral-400 font-light text-sm leading-relaxed space-y-4"><p>I guide the overall visual tone, from photoshoots to full campaign rollouts, ensuring consistency and impact across all touchpoints.</p><a href="#contact" class="nav-link inline-block text-brand-zona border border-brand-zona/30 px-4 py-2 rounded-full font-mono text-[10px] hover:bg-brand-zona hover:text-black transition-colors">GET THIS SERVICE</a></div></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- MAIN DECK (UPDATED FOR MOBILE SIZING & POSITIONS) -->
+        <!-- MAIN DECK -->
         <section id="deck" class="min-h-screen py-20 relative flex flex-col items-center justify-center overflow-hidden">
             <div class="mb-32 text-center z-10">
-                <span class="text-brand-zona font-mono text-[10px] uppercase tracking-widest mb-2 block hacker-text" data-value="Interactive Deck">Interactive Deck</span>
-                <h2 class="text-4xl md:text-5xl font-serif text-white">Featured Works</h2>
+                <span class="text-brand-zona font-mono text-[10px] uppercase tracking-widest mb-2 block hacker-text" data-value="Mainly Projects">Interactive Deck</span>
+                <h2 class="text-4xl md:text-5xl font-serif text-white">My Featured projects</h2>
             </div>
             
-            <!-- Width and Height updated for mobile responsiveness -->
             <div class="project-deck relative w-[240px] h-[350px] md:w-[400px] md:h-[600px] group perspective-1000">
-                
-                <!-- SOLARE CARD -->
-                <!-- Removed inline transforms, using CSS classes card-solare, etc. for positioning -->
-                <div id="card-solare" class="holo-card card-solare card-yellow absolute top-0 left-0 w-full h-full rounded-xl p-8 flex flex-col justify-between z-10" 
-                     onmouseenter="audioEngine.play('hover')" onclick="magicOpen('solare')">
-                    <div class="flex justify-between items-start"><span class="font-mono text-xs text-brand-solare border border-brand-solare/30 px-2 py-1 rounded-full">03</span><span class="iconify text-brand-solare text-xl" data-icon="lucide:arrow-up-right"></span></div>
-                    <div class="text-center"><h3 class="text-4xl font-serif text-white mb-2">Solare</h3><p class="font-mono text-xs text-neutral-400 uppercase tracking-widest">Coffee House</p></div>
-                    <div class="w-full h-1/2 bg-black/50 rounded-lg overflow-hidden relative"><img src="assets/images/solare.jpg" class="w-full h-full object-cover opacity-80"><div class="absolute inset-0 bg-brand-solare/10 mix-blend-overlay"></div></div>
+                <div id="card-zona" class="holo-card card-zona card-lime absolute top-0 left-0 w-full h-full rounded-xl p-8 flex flex-col justify-between z-30" 
+                     onmouseenter="audioEngine.play('hover')" onclick="magicOpen('zona')">
+                    <div class="flex justify-between items-start"><span class="font-mono text-xs text-brand-zona border border-brand-zona/30 px-2 py-1 rounded-full">01</span><span class="iconify text-brand-zona text-xl" data-icon="lucide:arrow-up-right"></span></div>
+                    <div class="text-center"><h3 class="text-4xl font-serif text-white mb-2">Zona</h3><p class="font-mono text-xs text-neutral-400 uppercase tracking-widest">Media & Culture</p></div>
+                    <div class="w-full h-1/2 bg-black/50 rounded-lg overflow-hidden relative"><img src="assets/images/zona.png" class="w-full h-full object-cover opacity-80"><div class="absolute inset-0 bg-brand-zona/10 mix-blend-overlay"></div></div>
                 </div>
 
-                <!-- VYNE CARD -->
                 <div id="card-vyne" class="holo-card card-vyne card-purple absolute top-0 left-0 w-full h-full rounded-xl p-8 flex flex-col justify-between z-20" 
                      onmouseenter="audioEngine.play('hover')" onclick="magicOpen('vyne')">
                     <div class="flex justify-between items-start"><span class="font-mono text-xs text-brand-vyne border border-brand-vyne/30 px-2 py-1 rounded-full">02</span><span class="iconify text-brand-vyne text-xl" data-icon="lucide:arrow-up-right"></span></div>
@@ -328,13 +321,13 @@
                     <div class="w-full h-1/2 bg-black/50 rounded-lg overflow-hidden relative"><img src="assets/images/vyne.jpg" class="w-full h-full object-cover opacity-80"><div class="absolute inset-0 bg-brand-vyne/10 mix-blend-overlay"></div></div>
                 </div>
 
-                <!-- ZONA CARD -->
-                <div id="card-zona" class="holo-card card-zona card-lime absolute top-0 left-0 w-full h-full rounded-xl p-8 flex flex-col justify-between z-30" 
-                     onmouseenter="audioEngine.play('hover')" onclick="magicOpen('zona')">
-                    <div class="flex justify-between items-start"><span class="font-mono text-xs text-brand-zona border border-brand-zona/30 px-2 py-1 rounded-full">01</span><span class="iconify text-brand-zona text-xl" data-icon="lucide:arrow-up-right"></span></div>
-                    <div class="text-center"><h3 class="text-4xl font-serif text-white mb-2">Zona</h3><p class="font-mono text-xs text-neutral-400 uppercase tracking-widest">Media & Culture</p></div>
-                    <div class="w-full h-1/2 bg-black/50 rounded-lg overflow-hidden relative"><img src="assets/images/zona.png" class="w-full h-full object-cover opacity-80"><div class="absolute inset-0 bg-brand-zona/10 mix-blend-overlay"></div></div>
+                <div id="card-solare" class="holo-card card-solare card-yellow absolute top-0 left-0 w-full h-full rounded-xl p-8 flex flex-col justify-between z-10" 
+                     onmouseenter="audioEngine.play('hover')" onclick="magicOpen('solare')">
+                    <div class="flex justify-between items-start"><span class="font-mono text-xs text-brand-solare border border-brand-solare/30 px-2 py-1 rounded-full">03</span><span class="iconify text-brand-solare text-xl" data-icon="lucide:arrow-up-right"></span></div>
+                    <div class="text-center"><h3 class="text-4xl font-serif text-white mb-2">Solare</h3><p class="font-mono text-xs text-neutral-400 uppercase tracking-widest">Coffee House</p></div>
+                    <div class="w-full h-1/2 bg-black/50 rounded-lg overflow-hidden relative"><img src="assets/images/solare.jpg" class="w-full h-full object-cover opacity-80"><div class="absolute inset-0 bg-brand-solare/10 mix-blend-overlay"></div></div>
                 </div>
+
             </div>
             <p class="mt-20 text-neutral-600 font-mono text-[10px] animate-pulse">Select a card to reveal</p>
         </section>
@@ -343,7 +336,7 @@
         <section id="archives" class="py-32 bg-black border-t border-white/10">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="flex justify-between items-end mb-20 reveal">
-                    <div><h2 class="text-4xl md:text-5xl font-serif text-white mb-2">Visual Archives</h2><p class="text-neutral-500 font-mono text-xs">Explore the vault</p></div>
+                    <div><h2 class="text-4xl md:text-5xl font-serif text-white mb-2">Others works</h2><p class="text-neutral-500 font-mono text-xs">A showcase of my other work, including poster designs, social media campaigns, logo collections, and print projects.</p></div>
                     <div class="hidden md:block w-32 h-[1px] bg-brand-zona"></div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 archive-grid">
@@ -367,24 +360,47 @@
             </div>
         </section>
 
-        <!-- ========= MODALS WITH FLUID RESPONSIVE GRID ========= -->
+        <!-- ========= MODALS WITH RICH TEXT + ORIGINAL GRID ========= -->
         
-        <!-- MODAL ZONA -->
-        <div id="modal-zona" class="project-modal bg-black" data-lenis-prevent="true">
+        <!-- MODAL ZONA (RICH TEXT + ORIGINAL GRID) -->
+        <div id="modal-zona" class="project-modal bg-[#050505]" data-lenis-prevent="true">
             <div class="sticky top-0 z-50 flex justify-between items-center p-6 bg-black/90 backdrop-blur-md border-b border-brand-zona/20">
-                <span class="text-brand-zona font-mono text-xl font-bold">ZONA RECORDS</span>
-                <button onclick="closeProject('zona'); audioEngine.play('click')" class="text-white hover:text-brand-zona font-mono uppercase">[ CLOSE ]</button>
-            </div>
-            <div class="w-full max-w-[95vw] mx-auto p-6 md:p-12">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16 max-w-5xl mx-auto">
-                    <div>
-                        <h2 class="text-6xl md:text-8xl font-serif text-white leading-[0.9] mb-6">Underground<br><span class="text-brand-zona italic">Culture</span></h2>
-                        <p class="text-neutral-400 font-light leading-relaxed mb-6">A complete visual identity overhaul for Zona Records.</p>
-                        <a href="#contact" onclick="closeProject('zona')" class="nav-link inline-block bg-brand-zona text-black px-6 py-3 font-mono text-xs uppercase tracking-widest hover:bg-white transition-colors">Start Similar Project</a>
-                    </div>
-                    <div class="font-mono text-xs text-neutral-500 space-y-2 border-l border-white/10 pl-6"><p>CLIENT: ZONA RECORDS</p><p>YEAR: 2024</p><p>SERVICES: IDENTITY, SOCIAL, PRINT</p></div>
+                <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 bg-brand-zona rounded-full animate-pulse"></div>
+                    <span class="text-brand-zona font-mono text-lg tracking-widest">ZONA RECORDS</span>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+                <button onclick="closeProject('zona'); audioEngine.play('click')" class="text-neutral-400 hover:text-brand-zona font-mono uppercase text-xs border border-white/10 px-4 py-2 rounded-full transition-colors">[ CLOSE PROJECT ]</button>
+            </div>
+            <div class="w-full max-w-7xl mx-auto px-6 py-12 md:py-20">
+                <!-- 1. INTRO / DATA GRID -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 border-b border-white/10 pb-12">
+                    <div><span class="text-[10px] font-mono text-brand-zona uppercase tracking-widest block mb-2">/ Industry</span><p class="text-white text-xl font-serif">Rap & RnB Media</p></div>
+                    <div><span class="text-[10px] font-mono text-brand-zona uppercase tracking-widest block mb-2">/ Objective</span><p class="text-neutral-400 text-sm leading-relaxed">Build a bold and streetwear inspired visual identity that stands out from the usual trends while staying easily recognizable.</p></div>
+                    <div><span class="text-[10px] font-mono text-brand-zona uppercase tracking-widest block mb-2">/ Creation</span><p class="text-neutral-400 text-sm leading-relaxed">Complete visual identity from the logo to the graphic system.</p></div>
+                </div>
+                <!-- 2. THE NARRATIVE -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-24 items-center">
+                    <div class="lg:col-span-8">
+                        <h2 class="text-5xl md:text-7xl font-serif text-white mb-8 leading-[0.9]">Underground <br><span class="text-brand-zona italic">Culture.</span></h2>
+                        <div class="space-y-6 text-neutral-400 font-light leading-relaxed text-sm md:text-base">
+                            <p>The creative direction started with an exploration of streetwear visual codes: bold typography, sharp contrasts, and minimal compositions inspired by underground culture.</p>
+                            <p>I wanted the identity to speak to a young, expressive audience while keeping a professional and recognizable aesthetic. The lime green color was chosen for its high energy and visibility, balancing perfectly with black to bring a modern yet raw visual feel.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 3. DESIGN DETAILS -->
+                <div class="mb-24 bg-white/5 rounded-xl p-8 md:p-12 border border-white/5">
+                    <h3 class="text-brand-zona font-mono text-xs uppercase tracking-widest mb-10">/ Design Specifications</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="detail-card"><span class="detail-number text-brand-zona">01</span><h4 class="text-white font-serif text-lg mb-2">Vitality</h4><p class="text-neutral-500 text-xs leading-relaxed">The lime green accent was used to represent vitality and creativity within the urban space.</p></div>
+                        <div class="detail-card"><span class="detail-number text-brand-zona">02</span><h4 class="text-white font-serif text-lg mb-2">Authority</h4><p class="text-neutral-500 text-xs leading-relaxed">The black base reinforces authority and contrast, grounding the vibrant accents.</p></div>
+                        <div class="detail-card"><span class="detail-number text-brand-zona">03</span><h4 class="text-white font-serif text-lg mb-2">Urban Feel</h4><p class="text-neutral-500 text-xs leading-relaxed">The logo spacing was slightly tightened to give it a denser, more urban feel.</p></div>
+                        <div class="detail-card"><span class="detail-number text-brand-zona">04</span><h4 class="text-white font-serif text-lg mb-2">Rhythm</h4><p class="text-neutral-500 text-xs leading-relaxed">Typography shapes subtly evoke sound waves, connecting the visual back to music.</p></div>
+                    </div>
+                </div>
+                <!-- 4. GALLERY (ORIGINAL 2-COL GRID) -->
+                <h3 class="text-2xl font-serif text-white mb-8 flex items-center gap-4"><span class="w-12 h-[1px] bg-white/20"></span>Project Gallery</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 mb-24">
                     <div class="img-container"><img src="assets/images/zona.png"></div>
                     <div class="img-container"><img src="assets/images/zona-records-1.jpg"></div>
                     <div class="img-container"><img src="assets/images/carte-de-visite-zona.png"></div>
@@ -392,26 +408,54 @@
                     <div class="img-container"><img src="assets/images/story-2-zona.png"></div>
                     <div class="img-container"><img src="assets/images/post-3-zona.png"></div>
                 </div>
-                <div class="text-center mt-20 pb-20"><a href="#contact" onclick="closeProject('zona')" class="nav-link text-white text-4xl font-serif hover:text-brand-zona transition-colors">Let's work together <span class="iconify inline" data-icon="lucide:arrow-right"></span></a></div>
+                <!-- 5. CONCLUSION -->
+                <div class="text-center max-w-3xl mx-auto py-12">
+                    <div class="w-px h-20 bg-gradient-to-b from-transparent via-brand-zona to-transparent mx-auto mb-8"></div>
+                    <p class="text-2xl md:text-3xl font-serif text-white italic mb-8">"A bold and authentic identity that visually resonates with the rap and RnB community, giving Zona Records a signature streetwear personality."</p>
+                    <a href="#contact" onclick="closeProject('zona')" class="nav-link inline-flex items-center gap-2 bg-brand-zona text-black px-8 py-4 rounded-full font-mono text-xs uppercase tracking-widest hover:scale-105 transition-transform">Start a Project like this <span class="iconify" data-icon="lucide:arrow-right"></span></a>
+                </div>
             </div>
         </div>
 
-        <!-- MODAL VYNE -->
-        <div id="modal-vyne" class="project-modal bg-black" data-lenis-prevent="true">
-             <div class="sticky top-0 z-50 flex justify-between items-center p-6 bg-black/90 backdrop-blur-md border-b border-brand-vyne/20">
-                <span class="text-brand-vyne font-mono text-xl font-bold">VYNE ATHLETICS</span>
-                <button onclick="closeProject('vyne'); audioEngine.play('click')" class="text-white hover:text-brand-vyne font-mono uppercase">[ CLOSE ]</button>
-            </div>
-            <div class="w-full max-w-[95vw] mx-auto p-6 md:p-12">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16 max-w-5xl mx-auto">
-                    <div>
-                        <h2 class="text-6xl md:text-8xl font-serif text-white leading-[0.9] mb-6">Power &<br><span class="text-brand-vyne italic">Motion</span></h2>
-                        <p class="text-neutral-400 font-light leading-relaxed mb-6">Bold typography meets dynamic imagery.</p>
-                        <a href="#contact" onclick="closeProject('vyne')" class="nav-link inline-block bg-brand-vyne text-white px-6 py-3 font-mono text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-colors">Start Similar Project</a>
-                    </div>
-                    <div class="font-mono text-xs text-neutral-500 space-y-2 border-l border-white/10 pl-6"><p>CLIENT: VYNE</p><p>YEAR: 2023</p><p>SERVICES: BRANDING, ART DIRECTION</p></div>
+        <!-- MODAL VYNE (RICH TEXT + ORIGINAL GRID) -->
+        <div id="modal-vyne" class="project-modal bg-[#050505]" data-lenis-prevent="true">
+            <div class="sticky top-0 z-50 flex justify-between items-center p-6 bg-black/90 backdrop-blur-md border-b border-brand-vyne/20">
+                <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 bg-brand-vyne rounded-full animate-pulse"></div>
+                    <span class="text-brand-vyne font-mono text-lg tracking-widest">VYNE ATHLETICS</span>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+                <button onclick="closeProject('vyne'); audioEngine.play('click')" class="text-neutral-400 hover:text-brand-vyne font-mono uppercase text-xs border border-white/10 px-4 py-2 rounded-full transition-colors">[ CLOSE PROJECT ]</button>
+            </div>
+            <div class="w-full max-w-7xl mx-auto px-6 py-12 md:py-20">
+                <!-- 1. INTRO / DATA GRID -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 border-b border-white/10 pb-12">
+                    <div><span class="text-[10px] font-mono text-brand-vyne uppercase tracking-widest block mb-2">/ Industry</span><p class="text-white text-xl font-serif">Streetwear & Sports</p></div>
+                    <div><span class="text-[10px] font-mono text-brand-vyne uppercase tracking-widest block mb-2">/ Objective</span><p class="text-neutral-400 text-sm leading-relaxed">Build a powerful brand image that reflects strength and high perceived value within the streetwear culture.</p></div>
+                    <div><span class="text-[10px] font-mono text-brand-vyne uppercase tracking-widest block mb-2">/ Creation</span><p class="text-neutral-400 text-sm leading-relaxed">Logo design and a promotional visual series to enhance brand identity and awareness.</p></div>
+                </div>
+                <!-- 2. THE NARRATIVE -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-24 items-center">
+                    <div class="lg:col-span-8">
+                        <h2 class="text-5xl md:text-7xl font-serif text-white mb-8 leading-[0.9]">Power & <br><span class="text-brand-vyne italic">Motion.</span></h2>
+                        <div class="space-y-6 text-neutral-400 font-light leading-relaxed text-sm md:text-base">
+                            <p>For Vyne, I wanted to merge the spirit of streetwear with athletic confidence. The process began with a study of strong, geometric shapes often found in sports branding.</p>
+                            <p>I leaned towards darker tones to convey power, ambition, and exclusivity—an identity that feels premium yet approachable.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 3. DESIGN DETAILS -->
+                <div class="mb-24 bg-white/5 rounded-xl p-8 md:p-12 border border-white/5">
+                    <h3 class="text-brand-vyne font-mono text-xs uppercase tracking-widest mb-10">/ Design Specifications</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="detail-card hover:border-brand-vyne/50"><span class="detail-number text-brand-vyne">01</span><h4 class="text-white font-serif text-lg mb-2">Precision</h4><p class="text-neutral-500 text-xs leading-relaxed">The logo was built with sharp angles to express precision and discipline in movement.</p></div>
+                        <div class="detail-card hover:border-brand-vyne/50"><span class="detail-number text-brand-vyne">02</span><h4 class="text-white font-serif text-lg mb-2">Depth</h4><p class="text-neutral-500 text-xs leading-relaxed">The dark palette was enriched with subtle gradients to add texture and visual depth.</p></div>
+                        <div class="detail-card hover:border-brand-vyne/50"><span class="detail-number text-brand-vyne">03</span><h4 class="text-white font-serif text-lg mb-2">Momentum</h4><p class="text-neutral-500 text-xs leading-relaxed">Promotional visuals used shadows and focused light to suggest power and momentum.</p></div>
+                        <div class="detail-card hover:border-brand-vyne/50"><span class="detail-number text-brand-vyne">04</span><h4 class="text-white font-serif text-lg mb-2">Structure</h4><p class="text-neutral-500 text-xs leading-relaxed">Repetition and symmetry in layout reinforced the idea of control and structure.</p></div>
+                    </div>
+                </div>
+                <!-- 4. GALLERY (ORIGINAL 2-COL GRID) -->
+                <h3 class="text-2xl font-serif text-white mb-8 flex items-center gap-4"><span class="w-12 h-[1px] bg-white/20"></span>Project Gallery</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 mb-24">
                     <div class="img-container"><img src="assets/images/vyne.jpg" alt="Vyne Branding"></div>
                     <div class="img-container"><img src="assets/images/poster-vyne-2.jpg"></div>
                     <div class="img-container"><img src="assets/images/poster-vyne-1.jpg"></div>
@@ -419,26 +463,54 @@
                     <div class="img-container"><img src="assets/images/poster-vyne-3.jpg"></div>
                     <div class="img-container"><img src="assets/images/poster-vyne-4.jpg"></div>
                 </div>
-                <div class="text-center mt-20 pb-20"><a href="#contact" onclick="closeProject('vyne')" class="nav-link text-white text-4xl font-serif hover:text-brand-vyne transition-colors">Let's work together <span class="iconify inline" data-icon="lucide:arrow-right"></span></a></div>
+                <!-- 5. CONCLUSION -->
+                <div class="text-center max-w-3xl mx-auto py-12">
+                    <div class="w-px h-20 bg-gradient-to-b from-transparent via-brand-vyne to-transparent mx-auto mb-8"></div>
+                    <p class="text-2xl md:text-3xl font-serif text-white italic mb-8">"An impactful, performance-driven identity that translates the brand’s energy into every piece of visual communication."</p>
+                    <a href="#contact" onclick="closeProject('vyne')" class="nav-link inline-flex items-center gap-2 bg-brand-vyne text-white px-8 py-4 rounded-full font-mono text-xs uppercase tracking-widest hover:scale-105 transition-transform">Start a Project like this <span class="iconify" data-icon="lucide:arrow-right"></span></a>
+                </div>
             </div>
         </div>
 
-        <!-- MODAL SOLARE -->
-        <div id="modal-solare" class="project-modal bg-black" data-lenis-prevent="true">
-             <div class="sticky top-0 z-50 flex justify-between items-center p-6 bg-black/90 backdrop-blur-md border-b border-brand-solare/20">
-                <span class="text-brand-solare font-mono text-xl font-bold">SOLARE COFFEE</span>
-                <button onclick="closeProject('solare'); audioEngine.play('click')" class="text-white hover:text-brand-solare font-mono uppercase">[ CLOSE ]</button>
-            </div>
-            <div class="w-full max-w-[95vw] mx-auto p-6 md:p-12">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16 max-w-5xl mx-auto">
-                    <div>
-                        <h2 class="text-6xl md:text-8xl font-serif text-white leading-[0.9] mb-6">Warmth &<br><span class="text-brand-solare italic">Light</span></h2>
-                        <p class="text-neutral-400 font-light leading-relaxed mb-6">Sunny yellow tones with deep, comforting blues.</p>
-                        <a href="#contact" onclick="closeProject('solare')" class="nav-link inline-block bg-brand-solare text-black px-6 py-3 font-mono text-xs uppercase tracking-widest hover:bg-white transition-colors">Start Similar Project</a>
-                    </div>
-                    <div class="font-mono text-xs text-neutral-500 space-y-2 border-l border-white/10 pl-6"><p>CLIENT: SOLARE</p><p>YEAR: 2024</p><p>SERVICES: PACKAGING, IDENTITY</p></div>
+        <!-- MODAL SOLARE (RICH TEXT + ORIGINAL GRID) -->
+        <div id="modal-solare" class="project-modal bg-[#050505]" data-lenis-prevent="true">
+            <div class="sticky top-0 z-50 flex justify-between items-center p-6 bg-black/90 backdrop-blur-md border-b border-brand-solare/20">
+                <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 bg-brand-solare rounded-full animate-pulse"></div>
+                    <span class="text-brand-solare font-mono text-lg tracking-widest">SOLARE COFFEE</span>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+                <button onclick="closeProject('solare'); audioEngine.play('click')" class="text-neutral-400 hover:text-brand-solare font-mono uppercase text-xs border border-white/10 px-4 py-2 rounded-full transition-colors">[ CLOSE PROJECT ]</button>
+            </div>
+            <div class="w-full max-w-7xl mx-auto px-6 py-12 md:py-20">
+                <!-- 1. INTRO / DATA GRID -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 border-b border-white/10 pb-12">
+                    <div><span class="text-[10px] font-mono text-brand-solare uppercase tracking-widest block mb-2">/ Industry</span><p class="text-white text-xl font-serif">Coffee & Relaxation</p></div>
+                    <div><span class="text-[10px] font-mono text-brand-solare uppercase tracking-widest block mb-2">/ Objective</span><p class="text-neutral-400 text-sm leading-relaxed">Attract coffee lovers who appreciate calm atmospheres and artistic visuals, by creating a warm and inviting brand identity.</p></div>
+                    <div><span class="text-[10px] font-mono text-brand-solare uppercase tracking-widest block mb-2">/ Creation</span><p class="text-neutral-400 text-sm leading-relaxed">Logo design and full visual identity, including packaging concepts.</p></div>
+                </div>
+                <!-- 2. THE NARRATIVE -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-24 items-center">
+                    <div class="lg:col-span-8">
+                        <h2 class="text-5xl md:text-7xl font-serif text-white mb-8 leading-[0.9]">Warmth & <br><span class="text-brand-solare italic">Light.</span></h2>
+                        <div class="space-y-6 text-neutral-400 font-light leading-relaxed text-sm md:text-base">
+                            <p>Solare’s creation process revolved around warmth, comfort, and the sensory experience of good coffee. I explored color combinations that evoke calmness and optimism—blue for serenity and yellow for sunlight.</p>
+                            <p>The logo design took inspiration from minimalist illustrations, with soft lines to create a feeling of friendliness.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 3. DESIGN DETAILS -->
+                <div class="mb-24 bg-white/5 rounded-xl p-8 md:p-12 border border-white/5">
+                    <h3 class="text-brand-solare font-mono text-xs uppercase tracking-widest mb-10">/ Design Specifications</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="detail-card hover:border-brand-solare/50"><span class="detail-number text-brand-solare">01</span><h4 class="text-white font-serif text-lg mb-2">Harmony</h4><p class="text-neutral-500 text-xs leading-relaxed">Blue and yellow were balanced in proportions to avoid visual fatigue and create harmony.</p></div>
+                        <div class="detail-card hover:border-brand-solare/50"><span class="detail-number text-brand-solare">02</span><h4 class="text-white font-serif text-lg mb-2">Softness</h4><p class="text-neutral-500 text-xs leading-relaxed">Rounded typography conveys approachability and softness, essential for a relaxation space.</p></div>
+                        <div class="detail-card hover:border-brand-solare/50"><span class="detail-number text-brand-solare">03</span><h4 class="text-white font-serif text-lg mb-2">Illustration</h4><p class="text-neutral-500 text-xs leading-relaxed">Small illustrations elements were subtly added to reinforce the brand theme.</p></div>
+                        <div class="detail-card hover:border-brand-solare/50"><span class="detail-number text-brand-solare">04</span><h4 class="text-white font-serif text-lg mb-2">Collectible</h4><p class="text-neutral-500 text-xs leading-relaxed">The packaging was designed to feel collectible and visually pleasing on shelf.</p></div>
+                    </div>
+                </div>
+                <!-- 4. GALLERY (ORIGINAL 2-COL GRID) -->
+                <h3 class="text-2xl font-serif text-white mb-8 flex items-center gap-4"><span class="w-12 h-[1px] bg-white/20"></span>Project Gallery</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 mb-24">
                      <div class="img-container"><img src="assets/images/solare.jpg"></div>
                     <div class="img-container"><img src="assets/images/carte-de-visite-solare.jpg"></div>
                     <div class="img-container"><img src="assets/images/solare-packaging-1.png"></div>
@@ -446,7 +518,12 @@
                     <div class="img-container"><img src="assets/images/solare-post-4.png"></div>
                     <div class="img-container"><img src="assets/images/solare-post-5.png"></div>
                 </div>
-                <div class="text-center mt-20 pb-20"><a href="#contact" onclick="closeProject('solare')" class="nav-link text-white text-4xl font-serif hover:text-brand-solare transition-colors">Let's work together <span class="iconify inline" data-icon="lucide:arrow-right"></span></a></div>
+                <!-- 5. CONCLUSION -->
+                <div class="text-center max-w-3xl mx-auto py-12">
+                    <div class="w-px h-20 bg-gradient-to-b from-transparent via-brand-solare to-transparent mx-auto mb-8"></div>
+                    <p class="text-2xl md:text-3xl font-serif text-white italic mb-8">"A charming and peaceful identity that captures the essence of relaxation and creativity—perfectly aligned with Solare’s atmosphere."</p>
+                    <a href="#contact" onclick="closeProject('solare')" class="nav-link inline-flex items-center gap-2 bg-brand-solare text-black px-8 py-4 rounded-full font-mono text-xs uppercase tracking-widest hover:scale-105 transition-transform">Start a Project like this <span class="iconify" data-icon="lucide:arrow-right"></span></a>
+                </div>
             </div>
         </div>
 
@@ -457,7 +534,7 @@
                 <button onclick="closeArchive('posters'); audioEngine.play('click')" class="text-white hover:text-brand-zona font-mono uppercase">[ CLOSE ]</button>
             </div>
             <div class="w-full max-w-[95vw] mx-auto p-6 md:p-12">
-                <div class="mb-12 border-b border-white/10 pb-8 max-w-5xl mx-auto"><h2 class="text-4xl font-serif text-white">Visual Impact.</h2><p class="text-neutral-400 mt-2">A collection of experimental and commissioned poster art.</p></div>
+                <div class="mb-12 border-b border-white/10 pb-8 max-w-5xl mx-auto"><h2 class="text-4xl font-serif text-white">Visual Concepts.</h2><p class="text-neutral-400 mt-2">A collection of experimental and commissioned poster art, showcasing bold ideas, creative exploration, and designs that capture attention.</p></div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                     <div class="img-container"><img src="assets/images/poster-4.jpg"></div>
                     <div class="img-container"><img src="assets/images/poster-5.jpeg"></div>
@@ -477,7 +554,7 @@
                 <button onclick="closeArchive('social'); audioEngine.play('click')" class="text-white hover:text-brand-vyne font-mono uppercase">[ CLOSE ]</button>
             </div>
             <div class="w-full max-w-[95vw] mx-auto p-6 md:p-12">
-                <div class="mb-12 border-b border-white/10 pb-8 max-w-5xl mx-auto"><h2 class="text-4xl font-serif text-white">Digital Presence.</h2><p class="text-neutral-400 mt-2">Engaging visuals tailored for the scroll economy.</p></div>
+                <div class="mb-12 border-b border-white/10 pb-8 max-w-5xl mx-auto"><h2 class="text-4xl font-serif text-white">Digital Presence.</h2><p class="text-neutral-400 mt-2">Engaging visuals tailored for the scroll economy, designed to capture attention, drive interaction, and make brands stand out on social media.</p></div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                     <div class="img-container"><img src="assets/images/nike-glace.jpeg"></div>
                     <div class="img-container"><img src="assets/images/lays-poster-2.jpeg"></div>
@@ -497,8 +574,7 @@
                 <button onclick="closeArchive('logos'); audioEngine.play('click')" class="text-white hover:text-brand-solare font-mono uppercase">[ CLOSE ]</button>
             </div>
             <div class="w-full max-w-[95vw] mx-auto p-6 md:p-12">
-                <div class="mb-12 border-b border-white/10 pb-8 max-w-5xl mx-auto"><h2 class="text-4xl font-serif text-white">The Marks.</h2><p class="text-neutral-400 mt-2">Distinctive symbols crafted for clarity.</p></div>
-                <!-- 2 COLS LOGOS GRID ON MOBILE AND DESKTOP -->
+                <div class="mb-12 border-b border-white/10 pb-8 max-w-5xl mx-auto"><h2 class="text-4xl font-serif text-white">The Marks.</h2><p class="text-neutral-400 mt-2">Distinctive symbols crafted for clarity and impact, designed to make brands instantly recognizable and communicate their identity with confidence.</p></div>
                 <div class="grid grid-cols-2 gap-4 md:gap-8">
                     <div class="logo-grid-item rounded-sm"><img src="assets/images/logo-principal-brune-prod.jpg"></div>
                     <div class="logo-grid-item rounded-sm"><img src="assets/images/toasty.jpg"></div>
@@ -607,7 +683,6 @@
             if (!isActive) { element.classList.add('active'); gsap.to(content, { height: "auto", opacity: 1, duration: 0.5, ease: "power2.out" }); }
         }
 
-        // --- NEW: Toggle Mobile Menu Function ---
         function toggleMobileMenu() {
             const dropdown = document.getElementById('nav-dropdown');
             const btn = document.getElementById('menu-btn');
@@ -621,12 +696,10 @@
             }
         }
 
-        // --- UPDATED: Initial state handled by CSS now (removed initialCardStates object) ---
         function magicOpen(id) { 
             audioEngine.play('click'); 
             const card = document.getElementById(`card-${id}`); 
             const modal = document.getElementById(`modal-${id}`); 
-            
             gsap.timeline()
                 .to(card, { y: -150, z: 100, rotate: 0, x: 0, scale: 1.1, duration: 0.5, ease: "back.out(1.2)" })
                 .to(card, { filter: "brightness(3)", duration: 0.1, onComplete: () => { openModal(modal); gsap.set(card, { opacity: 0 }); } }); 
@@ -634,28 +707,22 @@
 
         function openModal(modal) { if(!modal) return; modal.classList.add('active'); lenis.stop(); gsap.from(modal.querySelectorAll('.img-container, h2'), { y: 50, opacity: 0, stagger: 0.05, duration: 0.8, ease: "power2.out", delay: 0.3 }); }
         
-        // --- UPDATED: closeProject to calculate return position based on screen width ---
         function closeProject(id) { 
             const modal = document.getElementById(`modal-${id}`); 
             const card = document.getElementById(`card-${id}`); 
             modal.classList.remove('active'); 
             lenis.start(); 
-            
-            // Calculate where card should return based on screen size (matching CSS values)
             const isMobile = window.innerWidth < 768;
-            let targetX = 0, targetY = 0, targetR = 0;
-
-            if (id === 'solare') {
-                targetR = isMobile ? 5 : 15; targetX = isMobile ? 15 : 80; targetY = isMobile ? 5 : 10;
-            } else if (id === 'vyne') {
-                targetR = isMobile ? -5 : -10; targetX = isMobile ? -15 : -80; targetY = isMobile ? 5 : 10;
-            } else { // zona
-                targetR = 0; targetX = 0; targetY = isMobile ? -5 : -20;
-            }
-
             gsap.set(card, { opacity: 1, filter: "none" }); 
-            // We use GSAP to animate back to the CSS-defined position
-            gsap.to(card, { x: targetX, y: targetY, rotate: targetR, scale: 1, z: 0, duration: 0.6, ease: "power3.out", delay: 0.2, clearProps: "all" }); 
+            if(isMobile) {
+                gsap.to(card, { x: 0, y: 0, rotate: 0, scale: 1, z: 0, duration: 0.6, ease: "power3.out", clearProps: "all" });
+            } else {
+                let targetX = 0, targetY = 0, targetR = 0;
+                if (id === 'solare') { targetR = 15; targetX = 80; targetY = 10; }
+                else if (id === 'vyne') { targetR = -10; targetX = -80; targetY = 10; }
+                else { targetR = 0; targetX = 0; targetY = -20; }
+                gsap.to(card, { x: targetX, y: targetY, rotate: targetR, scale: 1, z: 0, duration: 0.6, ease: "power3.out", delay: 0.2 });
+            }
         }
 
         function openArchive(id) { const modal = document.getElementById(`modal-${id}`); if(!modal) return; modal.classList.add('active'); lenis.stop(); gsap.from(modal.querySelectorAll('.img-container, h2'), { y: 50, opacity: 0, stagger: 0.05, duration: 0.8, ease: "power2.out", delay: 0.3 }); }
@@ -667,7 +734,7 @@
         let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
         window.addEventListener("mousemove", e => { mouseX = e.clientX; mouseY = e.clientY; xDot(mouseX); yDot(mouseY); });
         gsap.ticker.add(() => { const dt = 1.0 - Math.pow(1.0 - 0.15, gsap.ticker.deltaRatio()); cursorX += (mouseX - cursorX) * dt; cursorY += (mouseY - cursorY) * dt; xTo(cursorX); yTo(cursorY); });
-        document.querySelectorAll('a, button, .holo-card, .img-container, input, textarea, .magnetic-btn, .service-item').forEach(el => { el.addEventListener('mouseenter', () => { audioEngine.play('hover'); gsap.to(cursor, { width: 60, height: 60, backgroundColor: '#fff', mixBlendMode: 'difference', borderColor: 'transparent', duration: 0.3 }); gsap.to(cursorDot, { opacity: 0 }); }); el.addEventListener('mouseleave', () => { gsap.to(cursor, { width: 20, height: 20, backgroundColor: 'transparent', mixBlendMode: 'exclusion', borderColor: '#ccff00', duration: 0.3 }); gsap.to(cursorDot, { opacity: 1 }); }); });
+        document.querySelectorAll('a, button, .holo-card, .img-container, input, textarea, .magnetic-btn, .service-item, .detail-card').forEach(el => { el.addEventListener('mouseenter', () => { audioEngine.play('hover'); gsap.to(cursor, { width: 60, height: 60, backgroundColor: '#fff', mixBlendMode: 'difference', borderColor: 'transparent', duration: 0.3 }); gsap.to(cursorDot, { opacity: 0 }); }); el.addEventListener('mouseleave', () => { gsap.to(cursor, { width: 20, height: 20, backgroundColor: 'transparent', mixBlendMode: 'exclusion', borderColor: '#ccff00', duration: 0.3 }); gsap.to(cursorDot, { opacity: 1 }); }); });
 
         const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; document.querySelectorAll(".hacker-text").forEach(item => { item.onmouseover = event => { let iteration = 0; clearInterval(item.interval); item.interval = setInterval(() => { event.target.innerText = event.target.innerText.split("").map((letter, index) => { if(index < iteration) return event.target.dataset.value[index]; return letters[Math.floor(Math.random() * 26)] }).join(""); if(iteration >= event.target.dataset.value.length) clearInterval(item.interval); iteration += 1 / 3; }, 30); } });
         const lightbox = document.getElementById('lightbox'); const lightboxImg = document.getElementById('lightbox-img'); document.querySelectorAll('.img-container img, .logo-grid-item img').forEach(img => { img.addEventListener('click', (e) => { e.stopPropagation(); lightboxImg.src = img.src; lightbox.classList.remove('hidden'); lenis.stop(); }); }); lightbox.addEventListener('click', () => { lightbox.classList.add('hidden'); lenis.start(); });
