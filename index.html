@@ -60,7 +60,7 @@
         .lenis.lenis-stopped { overflow: hidden; }
         body { background-color: #030303; cursor: none; overflow-x: hidden; color: #e5e5e5; }
 
-        /* --- MOBILE OPTIMIZATIONS (CORRECTED) --- */
+        /* --- MOBILE OPTIMIZATIONS --- */
         @media (max-width: 768px) {
             #cursor, #cursor-dot { display: none !important; }
             body { cursor: auto !important; }
@@ -74,23 +74,28 @@
             }
             .project-deck::-webkit-scrollbar { display: none; }
             
-            /* C'est ici la correction : on cible .project-deck .holo-card au lieu de toutes les .holo-card */
+            /* Cible uniquement les cartes DANS le deck */
             .project-deck .holo-card {
                 position: relative !important; top: auto !important; left: auto !important;
                 min-width: 85vw !important; max-width: 85vw !important; height: 100% !important;
                 transform: none !important; scroll-snap-align: center; margin: 0 !important;
             }
             
-            /* Reset des transformations pour les cartes du Deck */
             #card-solare, #card-vyne, #card-zona { transform: none !important; }
 
-            /* Styles spécifiques pour les archives sur mobile pour garantir l'affichage */
+            /* Styles spécifiques pour les archives sur mobile */
             .archive-grid .holo-card {
                 width: 100% !important;
                 min-width: 100% !important;
-                height: 400px !important; /* Force la hauteur */
+                height: 400px !important;
                 transform: none !important;
                 margin-bottom: 0 !important;
+            }
+
+            /* Indicateur de Swipe Mobile */
+            #mobile-swipe-hint {
+                display: flex !important;
+                opacity: 0;
             }
         }
         
@@ -98,6 +103,7 @@
             #card-solare { transform: rotate(15deg) translate(80px, 10px); }
             #card-vyne { transform: rotate(-10deg) translate(-80px, 10px); }
             #card-zona { transform: rotate(0deg) translate(0px, -20px); }
+            #mobile-swipe-hint { display: none !important; }
         }
 
         #nav-dropdown { transition: max-height 0.5s ease-in-out, opacity 0.3s ease; max-height: 0; overflow: hidden; opacity: 0; }
@@ -342,9 +348,15 @@
                     <div class="text-center"><h3 class="text-4xl font-serif text-white mb-2">Solare</h3><p class="font-mono text-xs text-neutral-400 uppercase tracking-widest">Coffee House</p></div>
                     <div class="w-full h-1/2 bg-black/50 rounded-lg overflow-hidden relative"><img src="assets/images/solare.jpg" class="w-full h-full object-cover opacity-80"><div class="absolute inset-0 bg-brand-solare/10 mix-blend-overlay"></div></div>
                 </div>
-
             </div>
-            <p class="mt-20 text-neutral-600 font-mono text-[10px] animate-pulse">Select a card to reveal</p>
+            
+            <!-- INDICATEUR DE SWIPE (Mobile) -->
+            <div id="mobile-swipe-hint" class="mt-8 flex items-center gap-2 text-neutral-500 font-mono text-[10px] animate-pulse">
+                <span>Swipe to explore</span>
+                <span class="iconify text-lg" data-icon="lucide:arrow-right"></span>
+            </div>
+            
+            <p class="mt-4 md:mt-20 text-neutral-600 font-mono text-[10px] animate-pulse hidden md:block">Select a card to reveal</p>
         </section>
 
         <!-- ARCHIVES -->
@@ -692,7 +704,7 @@
         window.addEventListener('load', () => {
             gsap.registerPlugin(ScrollTrigger, Flip);
             const tlLoader = gsap.timeline(); let countObj = { val: 0 };
-            tlLoader.to(countObj, { val: 100, duration: 1.5, ease: "power2.inOut", onUpdate: () => { const el = document.getElementById("preloader-count"); if(el) el.textContent = Math.floor(countObj.val) + "%"; } }).to("#preloader-bar", { width: "100%", duration: 1.5, ease: "power2.inOut" }, "<").to("#preloader", { y: "-100%", duration: 0.8, ease: "expo.inOut", delay: 0.2 }).add(() => initHeroAnimations(), "-=0.5");
+            tlLoader.to(countObj, { val: 100, duration: 1.5, ease: "power2.inOut", onUpdate: () => { const el = document.getElementById("preloader-count"); if(el) el.textContent = Math.floor(countObj.val) + "%"; } }).to("#preloader-bar", { width: "100%", duration: 1.5, ease: "power2.inOut" }, "<").to("#preloader", { y: "-100%", duration: 0.8, ease: "expo.inOut", delay: 0.2 }).add(() => { initHeroAnimations(); initMobileDeckAnimation(); }, "-=0.5");
         });
 
         const lenis = new Lenis({ duration: 1.5, smooth: true });
@@ -732,6 +744,45 @@
                 btn.innerText = "[ MENU + ]";
                 btn.classList.remove('bg-white', 'text-black');
             }
+        }
+
+        /* =========================================
+           MOBILE SWIPE ANIMATION (NUDGE)
+           ========================================= */
+        function initMobileDeckAnimation() {
+            if (window.innerWidth > 768) return; // Uniquement sur mobile
+
+            const deck = document.querySelector('.project-deck');
+            if (!deck) return;
+
+            ScrollTrigger.create({
+                trigger: "#deck",
+                start: "top 70%", // Déclenche quand le deck arrive à l'écran
+                once: true,
+                onEnter: () => {
+                    // Animation du scroll (Nudge)
+                    gsap.to(deck, {
+                        scrollLeft: 120, // Défile vers la droite
+                        duration: 1.2,
+                        ease: "power2.inOut",
+                        onComplete: () => {
+                            gsap.to(deck, {
+                                scrollLeft: 0, // Revient au début
+                                duration: 0.8,
+                                ease: "power2.out"
+                            });
+                        }
+                    });
+                    
+                    // Animation du texte "Swipe to explore"
+                    gsap.fromTo("#mobile-swipe-hint", 
+                        { opacity: 0, y: 10 }, 
+                        { opacity: 1, y: 0, duration: 0.5, onComplete: () => {
+                            gsap.to("#mobile-swipe-hint", { opacity: 0, delay: 3, duration: 0.5 }); // Disparaît après 3s
+                        }}
+                    );
+                }
+            });
         }
 
         /* =========================================
