@@ -60,10 +60,12 @@
         .lenis.lenis-stopped { overflow: hidden; }
         body { background-color: #030303; cursor: none; overflow-x: hidden; color: #e5e5e5; }
 
-        /* --- MOBILE OPTIMIZATIONS --- */
+        /* --- MOBILE OPTIMIZATIONS (CORRECTED) --- */
         @media (max-width: 768px) {
             #cursor, #cursor-dot { display: none !important; }
             body { cursor: auto !important; }
+            
+            /* Configuration du DECK (Carrousel du haut uniquement) */
             .project-deck {
                 display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important;
                 overflow-x: auto !important; overflow-y: hidden !important; gap: 20px !important;
@@ -71,12 +73,25 @@
                 perspective: none !important; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none;
             }
             .project-deck::-webkit-scrollbar { display: none; }
-            .holo-card {
+            
+            /* C'est ici la correction : on cible .project-deck .holo-card au lieu de toutes les .holo-card */
+            .project-deck .holo-card {
                 position: relative !important; top: auto !important; left: auto !important;
                 min-width: 85vw !important; max-width: 85vw !important; height: 100% !important;
                 transform: none !important; scroll-snap-align: center; margin: 0 !important;
             }
+            
+            /* Reset des transformations pour les cartes du Deck */
             #card-solare, #card-vyne, #card-zona { transform: none !important; }
+
+            /* Styles spécifiques pour les archives sur mobile pour garantir l'affichage */
+            .archive-grid .holo-card {
+                width: 100% !important;
+                min-width: 100% !important;
+                height: 400px !important; /* Force la hauteur */
+                transform: none !important;
+                margin-bottom: 0 !important;
+            }
         }
         
         @media (min-width: 769px) {
